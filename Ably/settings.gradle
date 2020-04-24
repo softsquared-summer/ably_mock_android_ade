@@ -1,0 +1,2 @@
+rootProject.name='Ably'
+include ':app'
