@@ -2,12 +2,14 @@ package com.jinwoo.ably.src.main;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-
+import android.widget.Button;
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-
+import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.BaseActivity;
@@ -17,7 +19,11 @@ import com.jinwoo.ably.src.main.models.SignInResponse;
 public class MainActivity extends BaseActivity implements MainActivityView {
     private MainService mMainService;
     private Toolbar mToolbar;
-    private BottomNavigationView mbottomNavigationView;
+    private DrawerLayout mDrawerLayout;
+    private View mDrawerView;
+    private BottomNavigationView mBottomNavigationView, mTopNavigationView;
+    private ImageView mDrawerMenuButton;
+    private Button mLogin, mSignin, mPoint, mCoupon, mDelivery, mSupport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +32,107 @@ public class MainActivity extends BaseActivity implements MainActivityView {
 
         mMainService = new MainService(this);
         mToolbar = (Toolbar) findViewById(R.id.main_Toolbar);
-        mbottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
+        mDrawerView = (View) findViewById(R.id.drawer_drawer);
+        mTopNavigationView = (BottomNavigationView) findViewById(R.id.main_top_navigation);
+        mBottomNavigationView = (BottomNavigationView) findViewById(R.id.main_bottom_navigation);
+        mDrawerMenuButton = (ImageView) findViewById(R.id.main_iv_menu);
+        mLogin = (Button) findViewById(R.id.drawer_login);
+        mSignin = (Button) findViewById(R.id.drawer_signin);
+        mPoint = (Button) findViewById(R.id.drawer_point);
+        mCoupon = (Button) findViewById(R.id.drawer_coupon);
+        mDelivery = (Button) findViewById(R.id.drawer_delivery);
+        mSupport = (Button) findViewById(R.id.drawer_support);
 
         setSupportActionBar(mToolbar);
 
-        mbottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        // Drawer navigation bar setting
+        mDrawerMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(mDrawerView);
+            }
+        });
+
+        //mDrawerLayout.setDrawerListener(listener);
+        mDrawerLayout.addDrawerListener(listener);
+        mDrawerView.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                showCustomToast("TOUCH");
+                return true;
+            }
+        });
+
+
+
+        mLogin.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                showCustomToast("LOG IN");
+            }
+        });
+
+        mSignin.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                showCustomToast("SIGN IN");
+            }
+        });
+
+        mPoint.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                showCustomToast("POINT");
+            }
+        });
+
+        mCoupon.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                showCustomToast("COUPON");
+            }
+        });
+
+        mDelivery.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                showCustomToast("DELIVERY");
+            }
+        });
+
+        mSupport.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                showCustomToast("SUPPORT");
+            }
+        });
+
+
+        // Top navigation Bar
+        mTopNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch(menuItem.getItemId()){
+                    case R.id.top_today:
+                        showCustomToast("TODAY");
+                        break;
+                    case R.id.top_new:
+                        showCustomToast("NEW");
+                        break;
+                    case R.id.top_best:
+                        showCustomToast("BEST");
+                        break;
+                    case R.id.top_hot_deal:
+                        showCustomToast("HOT DEAL");
+                        break;
+                }
+                return true;
+            }
+        });
+
+        // Bottom navigation bar
+        mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
@@ -53,6 +155,36 @@ public class MainActivity extends BaseActivity implements MainActivityView {
                 return true;
             }
         });
+    }
+
+    DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
+        @Override
+        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+        }
+
+        @Override
+        public void onDrawerOpened(@NonNull View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerClosed(@NonNull View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+
+        }
+    };
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(mDrawerView))
+            mDrawerLayout.closeDrawers();
+        else
+            finish();
     }
 
     private void tryGetTest() {

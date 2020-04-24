@@ -3,14 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/top_today"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:checked="true"
+        android:icon="@drawable/text_today"
         android:title="투데이"/>
     <item
         android:id="@+id/top_new"
+        app:showAsAction="always"
+        android:icon="@drawable/text_new"
         android:title="NEW"/>
     <item
         android:id="@+id/top_best"
+        app:showAsAction="always"
+        android:icon="@drawable/text_best"
         android:title="BEST" />
     <item
         android:id="@+id/top_hot_deal"
+        app:showAsAction="always"
+        android:icon="@drawable/text_hot_deal"
         android:title="핫딜" />
 </menu>

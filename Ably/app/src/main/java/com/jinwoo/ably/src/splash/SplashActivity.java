@@ -37,4 +37,9 @@ public class SplashActivity extends BaseActivity {
             }
         }, 1000);
     }
+
+    @Override
+    public void onBackPressed() {
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
 }

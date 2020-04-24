@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/drawer_drawer"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="start"
+    android:background="@color/colorLighterGrey">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="에이블리 회원이라면"
+            android:textColor="@color/colorBlack"
+            android:textSize="15dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="누구나 무료배송!"
+            android:textColor="@color/colorBlack"
+            android:textSize="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/drawer_tv_see_more_benefits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="더 큰 혜택 보기 >"
+            android:textColor="@color/colorBlue"
+            android:textSize="15dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorWhite"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/drawer_login"
+            android:layout_width="125dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:text="로그인" />
+
+        <Button
+            android:id="@+id/drawer_signin"
+            android:layout_width="125dp"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:text="5초 회원가입" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="6dp">
+
+        <Button
+            android:id="@+id/drawer_point"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:background="@drawable/button_point"/>
+
+        <Button
+            android:id="@+id/drawer_coupon"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/button_coupon"/>
+
+        <Button
+            android:id="@+id/drawer_delivery"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/button_delivery"/>
+
+        <Button
+            android:id="@+id/drawer_support"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/button_support"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="6dp"
+        android:paddingBottom="32dp"/>
+
+</LinearLayout>
