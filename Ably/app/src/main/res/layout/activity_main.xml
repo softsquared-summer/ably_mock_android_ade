@@ -53,8 +53,10 @@
                         <EditText
                             android:id="@+id/main_et_searchBar"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="8dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/edittext_grey"
+                            android:layout_gravity="center_vertical"
+                            android:paddingStart="16dp"
                             android:layout_weight="8"
                             android:inputType="text"
                             android:hint="상품이나 마켓을 검색해보세요!"
@@ -77,7 +79,6 @@
                         app:layout_collapseMode="pin"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:background="@color/colorWhite"
                         app:itemIconTint="@color/top_selection_color"
                         app:itemTextColor="@color/top_selection_color"
                         app:labelVisibilityMode="unlabeled"
@@ -93,56 +94,13 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <FrameLayout
+                android:id="@+id/main_body_fragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:gravity="center"
-                    android:text="TEST"
-                    android:textColor="@color/colorPrimary"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:gravity="center"
-                    android:text="TEST"
-                    android:textColor="@color/colorPrimary"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:gravity="center"
-                    android:text="TEST"
-                    android:textColor="@color/colorPrimary"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:gravity="center"
-                    android:text="TEST"
-                    android:textColor="@color/colorPrimary"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:gravity="center"
-                    android:text="TEST"
-                    android:textColor="@color/colorPrimary"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:gravity="center"
-                    android:text="TEST"
-                    android:textColor="@color/colorPrimary"/>
-            </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginBottom="?attr/actionBarSize"/>
 
         </androidx.core.widget.NestedScrollView>
 
@@ -163,4 +121,3 @@
     <include layout="@layout/activity_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
-

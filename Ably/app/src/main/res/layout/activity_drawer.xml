@@ -20,7 +20,7 @@
             android:text="에이블리 회원이라면"
             android:textColor="@color/colorBlack"
             android:textSize="15dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"/>
 
         <TextView
@@ -29,7 +29,7 @@
             android:text="누구나 무료배송!"
             android:textColor="@color/colorBlack"
             android:textSize="25dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"/>
 
         <TextView
@@ -39,7 +39,7 @@
             android:text="더 큰 혜택 보기 >"
             android:textColor="@color/colorBlue"
             android:textSize="15dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"/>
 
     </LinearLayout>
@@ -49,19 +49,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/colorWhite"
-        android:gravity="center">
+        android:gravity="center"
+        android:paddingVertical="16dp">
 
         <Button
             android:id="@+id/drawer_login"
             android:layout_width="125dp"
-            android:layout_height="60dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_white"
             android:layout_margin="8dp"
             android:text="로그인" />
 
         <Button
             android:id="@+id/drawer_signin"
             android:layout_width="125dp"
-            android:layout_height="60dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_white"
             android:layout_margin="8dp"
             android:text="5초 회원가입" />
 
@@ -102,9 +105,11 @@
 
     </LinearLayout>
 
-    <ListView
+    <ExpandableListView
+        android:id="@+id/drawer_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layoutDirection="rtl"
         android:background="@color/colorWhite"
         android:layout_marginTop="6dp"
         android:paddingBottom="32dp"/>
