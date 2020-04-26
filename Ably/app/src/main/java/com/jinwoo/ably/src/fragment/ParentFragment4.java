@@ -11,15 +11,18 @@ import androidx.fragment.app.Fragment;
 
 import com.jinwoo.ably.R;
 
-public class Fragment2 extends Fragment {
+public class ParentFragment4 extends Fragment {
 
-    public Fragment2() {
-
-    }
+    public ParentFragment4() {}
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment2, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_parent_4, container, false);
+
+
+
+        return view;
     }
+
 }

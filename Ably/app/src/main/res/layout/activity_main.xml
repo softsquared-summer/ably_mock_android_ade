@@ -27,63 +27,77 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/main_Toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_collapseMode="parallax"/>
+                    android:layout_height="0dp"
+                    app:layout_collapseMode="pin"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="?attr/actionBarSize"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:weightSum="10"
+                    app:layout_collapseMode="parallax">
 
-                    <LinearLayout
-                        app:layout_collapseMode="parallax"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:orientation="horizontal"
-                        android:weightSum="10">
-
-                        <ImageView
-                            android:id="@+id/main_iv_menu"
-                            android:layout_width="50dp"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/icon_menu"
-                            android:padding="10dp"
-                            android:layout_weight="1" />
+                    <ImageView
+                        android:id="@+id/main_iv_menu"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_menu"
+                        android:padding="10dp"
+                        android:layout_weight="1" />
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="8">
 
                         <EditText
-                            android:id="@+id/main_et_searchBar"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/main_et_search_bar"
+                            android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:background="@drawable/edittext_grey"
-                            android:layout_gravity="center_vertical"
                             android:paddingStart="16dp"
-                            android:layout_weight="8"
                             android:inputType="text"
                             android:hint="상품이나 마켓을 검색해보세요!"
                             android:textSize="14dp"
                             android:imeOptions="actionSearch"
                             android:includeFontPadding="false" />
 
-                        <ImageView
-                            android:id="@+id/main_iv_cart"
-                            android:layout_width="50dp"
+                        <LinearLayout
+                            android:id="@+id/main_top_detail"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/icon_cart"
-                            android:padding="10dp"
-                            android:layout_weight="1" />
+                            android:orientation="horizontal"
+                            android:weightSum="10">
 
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/main_top_detail_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="Bottom Menu"
+                                android:textSize="20dp"
+                                android:textColor="@color/colorBlack"
+                                android:gravity="center_vertical"
+                                android:layout_weight="9"/>
 
-                    <com.google.android.material.bottomnavigation.BottomNavigationView
-                        android:id="@+id/main_top_navigation"
-                        app:layout_collapseMode="pin"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        app:itemIconTint="@color/top_selection_color"
-                        app:itemTextColor="@color/top_selection_color"
-                        app:labelVisibilityMode="unlabeled"
-                        app:itemIconSize="80dp"
-                        app:menu="@menu/menu_top_navigation" />
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:src="@drawable/icon_search"
+                                android:layout_weight="1"/>
+
+                        </LinearLayout>
+                    </FrameLayout>
+
+
+                    <ImageView
+                        android:id="@+id/main_iv_cart"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_cart"
+                        android:padding="10dp"
+                        android:layout_weight="1" />
 
                 </LinearLayout>
 
@@ -93,14 +107,15 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="?attr/actionBarSize"
+            android:paddingBottom="?attr/actionBarSize"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <FrameLayout
-                android:id="@+id/main_body_fragment"
+                android:id="@+id/main_parent_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="?attr/actionBarSize"/>
+                android:layout_height="match_parent" />
 
         </androidx.core.widget.NestedScrollView>
 

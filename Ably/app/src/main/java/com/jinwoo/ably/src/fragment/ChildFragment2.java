@@ -6,33 +6,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.adapter.ProductAdapter;
 import com.jinwoo.ably.src.data.Product;
 import java.util.ArrayList;
 
-public class Fragment1 extends Fragment {
+public class ChildFragment2 extends Fragment {
 
     private ImageView mTop;
-    private RecyclerView mRecyclerView;
-    private ProductAdapter adapter;
+    private RecyclerView mRecyclerView1, mRecyclerView2;
+    private ProductAdapter adapter1, adapter2;
     private ArrayList<Product> productList;
 
-    public Fragment1() { }
+    public ChildFragment2() { }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_child2, container, false);
 
-        mTop = (ImageView) view.findViewById(R.id.frag1_top);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.frag1_body);
+        mTop = (ImageView) view.findViewById(R.id.frag2_top);
+        mRecyclerView1 = (RecyclerView) view.findViewById(R.id.frag2_body1);
+        mRecyclerView2 = (RecyclerView) view.findViewById(R.id.frag2_body2);
         productList = new ArrayList<>();
 
         mTop.setOnClickListener(new View.OnClickListener(){
@@ -61,10 +62,14 @@ public class Fragment1 extends Fragment {
         productList.add(p7);
         productList.add(p8);
 
-        mRecyclerView.setHasFixedSize(true);
-        adapter = new ProductAdapter(productList);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView1.setHasFixedSize(true);
+        mRecyclerView2.setHasFixedSize(true);
+        adapter1 = new ProductAdapter(productList);
+        adapter2 = new ProductAdapter(productList);
+        mRecyclerView1.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL ,false));
+        mRecyclerView2.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        mRecyclerView1.setAdapter(adapter1);
+        mRecyclerView2.setAdapter(adapter2);
 
         return view;
     }
