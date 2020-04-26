@@ -7,16 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jinwoo.ably.R;
-import com.jinwoo.ably.src.main.MainActivity;
 
 public class ParentFragment1 extends Fragment {
 
-    //private Toolbar mToolbar;
     private BottomNavigationView mTopNavigationView;
 
     public ParentFragment1() {}
@@ -25,9 +22,6 @@ public class ParentFragment1 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_parent_1, container, false);
-
-        //mToolbar = (Toolbar) view.findViewById(R.id.parent1_toolbar);
-        //((MainActivity)getActivity()).setSupportActionBar(mToolbar);
 
         mTopNavigationView = (BottomNavigationView) view.findViewById(R.id.parent1_top_navigation);
         mTopNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

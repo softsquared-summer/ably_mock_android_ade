@@ -1,5 +1,6 @@
 package com.jinwoo.ably.src.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -26,8 +27,10 @@ import com.jinwoo.ably.src.fragment.ParentFragment2;
 import com.jinwoo.ably.src.fragment.ParentFragment3;
 import com.jinwoo.ably.src.fragment.ParentFragment4;
 import com.jinwoo.ably.src.fragment.ParentFragment5;
+import com.jinwoo.ably.src.login.LoginActivity;
 import com.jinwoo.ably.src.main.interfaces.MainActivityView;
 import com.jinwoo.ably.src.main.models.SignInResponse;
+import com.jinwoo.ably.src.signup.SignupActivity1;
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity implements MainActivityView {
@@ -189,14 +192,14 @@ public class MainActivity extends BaseActivity implements MainActivityView {
             mLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showCustomToast("LOG IN");
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }
             });
 
             mSignin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showCustomToast("SIGN IN");
+                    startActivity(new Intent(MainActivity.this, SignupActivity1.class));
                 }
             });
 

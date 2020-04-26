@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.adapter.ProductAdapter;
 import com.jinwoo.ably.src.data.Product;
+import com.jinwoo.ably.src.main.MainActivity;
+
 import java.util.ArrayList;
 
 public class ChildFragment2 extends Fragment {
@@ -29,7 +31,7 @@ public class ChildFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_child2, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_child_2, container, false);
 
         mTop = (ImageView) view.findViewById(R.id.frag2_top);
         mRecyclerView1 = (RecyclerView) view.findViewById(R.id.frag2_body1);
@@ -64,8 +66,8 @@ public class ChildFragment2 extends Fragment {
 
         mRecyclerView1.setHasFixedSize(true);
         mRecyclerView2.setHasFixedSize(true);
-        adapter1 = new ProductAdapter(productList);
-        adapter2 = new ProductAdapter(productList);
+        adapter1 = new ProductAdapter(productList, (MainActivity)getActivity());
+        adapter2 = new ProductAdapter(productList, (MainActivity)getActivity());
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL ,false));
         mRecyclerView2.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         mRecyclerView1.setAdapter(adapter1);

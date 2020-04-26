@@ -1,5 +1,6 @@
 package com.jinwoo.ably.src.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.data.Product;
+import com.jinwoo.ably.src.main.MainActivity;
+import com.jinwoo.ably.src.product.ProductActivity;
+
 import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CustomViewHolder> {
 
     private ArrayList<Product> productList;
+    private MainActivity activity;
 
-    public ProductAdapter(ArrayList<Product> productList) {
+    public ProductAdapter(ArrayList<Product> productList, MainActivity activity) {
         this.productList = productList;
+        this.activity = activity;
     }
 
     @NonNull
@@ -41,8 +47,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CustomVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String currentName = holder.name.getText().toString();
-                Toast.makeText(v.getContext(), currentName, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(activity, ProductActivity.class);
+                //TODO: put url info of the selected product in the intent
+                activity.startActivity(intent);
             }
         });
 
