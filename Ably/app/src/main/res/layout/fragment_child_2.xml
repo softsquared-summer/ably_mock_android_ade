@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/frag2_top"
+            android:id="@+id/child2_top"
             android:layout_width="match_parent"
             android:layout_height="130dp"
             android:scaleType="fitXY"
@@ -35,14 +35,11 @@
                 android:layout_marginBottom="16dp"
                 android:layout_marginStart="8dp"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/frag2_body1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:scrollbarFadeDuration="0"
-                android:scrollbarSize="5dp"
-                android:scrollbarThumbVertical="@color/colorGrey" />
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/child2_body1"
+                android:layout_width="wrap_content"
+                android:layout_height="350dp"
+                android:padding="8dp" />
 
         </LinearLayout>
 
@@ -54,7 +51,7 @@
             android:layout_marginTop="8dp">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/frag2_body2"
+                android:id="@+id/child2_body2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"

@@ -1,5 +1,6 @@
 package com.jinwoo.ably.src.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.data.Product;
-import com.jinwoo.ably.src.main.MainActivity;
 import com.jinwoo.ably.src.product.ProductActivity;
 
 import java.util.ArrayList;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CustomViewHolder> {
+public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecyclerAdapter.CustomViewHolder> {
 
     private ArrayList<Product> productList;
-    private MainActivity activity;
+    private Context context;
 
-    public ProductAdapter(ArrayList<Product> productList, MainActivity activity) {
+    public ProductRecyclerAdapter(ArrayList<Product> productList, Context context) {
         this.productList = productList;
-        this.activity = activity;
+        this.context = context;
     }
 
     @NonNull
@@ -47,9 +47,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CustomVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, ProductActivity.class);
+                Intent intent = new Intent(context, ProductActivity.class);
                 //TODO: put url info of the selected product in the intent
-                activity.startActivity(intent);
+                context.startActivity(intent);
             }
         });
 
@@ -76,11 +76,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CustomVi
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.photo = (ImageView) itemView.findViewById(R.id.frag1_item_image);
-            this.price = (TextView) itemView.findViewById(R.id.frag1_item_price);
-            this.name = (TextView) itemView.findViewById(R.id.frag1_item_name);
-            this.description = (TextView) itemView.findViewById(R.id.frag1_item_description);
-            this.sales = (TextView) itemView.findViewById(R.id.frag1_item_sales);
+            this.photo = (ImageView) itemView.findViewById(R.id.item_product_iv_image);
+            this.price = (TextView) itemView.findViewById(R.id.item_product_tv_price);
+            this.name = (TextView) itemView.findViewById(R.id.item_product_tv_name);
+            this.description = (TextView) itemView.findViewById(R.id.item_product_tv_description);
+            this.sales = (TextView) itemView.findViewById(R.id.item_product_tv_sales);
         }
     }
 }
