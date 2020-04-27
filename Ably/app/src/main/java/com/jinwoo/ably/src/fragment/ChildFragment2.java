@@ -47,14 +47,14 @@ public class ChildFragment2 extends Fragment {
 
         //TODO: Networking required
         //Inserting product data into productList
-        Product p1 = new Product(R.drawable.icon_my_page, 10000, "product p1", "This is first product", "No sales info");
-        Product p2 = new Product(R.drawable.icon_my_page, 11000, "product p2", "This is second product", "No sales info");
-        Product p3 = new Product(R.drawable.icon_my_page, 13000, "product p3", "This is third product", "No sales info");
-        Product p4 = new Product(R.drawable.icon_my_page, 14000, "product p4", "This is fourth product", "No sales info");
-        Product p5 = new Product(R.drawable.icon_my_page, 15000, "product p5", "This is fifth product", "No sales info");
-        Product p6 = new Product(R.drawable.icon_my_page, 16000, "product p6", "This is sixth product", "No sales info");
-        Product p7 = new Product(R.drawable.icon_my_page, 17000, "product p7", "This is seventh product", "No sales info");
-        Product p8 = new Product(R.drawable.icon_my_page, 18000, "product p8", "This is eighth product", "No sales info");
+        Product p1 = new Product(R.drawable.img_product, 10000, "product p1", "This is first product", "No sales info");
+        Product p2 = new Product(R.drawable.img_product, 11000, "product p2", "This is second product", "No sales info");
+        Product p3 = new Product(R.drawable.img_product, 13000, "product p3", "This is third product", "No sales info");
+        Product p4 = new Product(R.drawable.img_product, 14000, "product p4", "This is fourth product", "No sales info");
+        Product p5 = new Product(R.drawable.img_product, 15000, "product p5", "This is fifth product", "No sales info");
+        Product p6 = new Product(R.drawable.img_product, 16000, "product p6", "This is sixth product", "No sales info");
+        Product p7 = new Product(R.drawable.img_product, 17000, "product p7", "This is seventh product", "No sales info");
+        Product p8 = new Product(R.drawable.img_product, 18000, "product p8", "This is eighth product", "No sales info");
         productList.add(p1);
         productList.add(p2);
         productList.add(p3);

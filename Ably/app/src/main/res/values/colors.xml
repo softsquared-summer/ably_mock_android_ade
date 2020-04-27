@@ -10,4 +10,5 @@
     <color name="colorGrey">#959595</color>
     <color name="colorRedPink">#FF7182</color>
     <color name="colorBlue">#1E7CFF</color>
+    <color name="colorTransparentBlack">#80000000</color>
 </resources>

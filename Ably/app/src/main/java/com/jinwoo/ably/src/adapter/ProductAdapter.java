@@ -47,7 +47,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CustomVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(activity, ProductActivity.class);
                 //TODO: put url info of the selected product in the intent
                 activity.startActivity(intent);
