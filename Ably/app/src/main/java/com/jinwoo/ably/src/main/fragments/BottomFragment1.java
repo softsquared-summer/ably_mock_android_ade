@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.fragment;
+package com.jinwoo.ably.src.main.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,16 +12,16 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jinwoo.ably.R;
 
-public class ParentFragment1 extends Fragment {
+public class BottomFragment1 extends Fragment {
 
     private BottomNavigationView mTopNavigationView;
 
-    public ParentFragment1() {}
+    public BottomFragment1() {}
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_parent_1, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_bottom_1, container, false);
 
         mTopNavigationView = (BottomNavigationView) view.findViewById(R.id.parent1_top_navigation);
         mTopNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -29,27 +29,27 @@ public class ParentFragment1 extends Fragment {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()){
                     case R.id.top_today:
-                        ChildFragment1 childFragment1 = new ChildFragment1();
-                        changeFragment(childFragment1);
+                        TopFragment1 topFragment1 = new TopFragment1();
+                        changeFragment(topFragment1);
                         break;
                     case R.id.top_new:
-                        ChildFragment2 childFragment2 = new ChildFragment2();
-                        changeFragment(childFragment2);
+                        TopFragment2 topFragment2 = new TopFragment2();
+                        changeFragment(topFragment2);
                         break;
                     case R.id.top_best:
-                        ChildFragment3 childFragment3 = new ChildFragment3();
-                        changeFragment(childFragment3);
+                        TopFragment3 topFragment3 = new TopFragment3();
+                        changeFragment(topFragment3);
                         break;
                     case R.id.top_hot_deal:
-                        ChildFragment4 childFragment4 = new ChildFragment4();
-                        changeFragment(childFragment4);
+                        TopFragment4 topFragment4 = new TopFragment4();
+                        changeFragment(topFragment4);
                         break;
                 }
                 return true;
             }
         });
 
-        ChildFragment1 frag = new ChildFragment1();
+        TopFragment1 frag = new TopFragment1();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(R.id.parent1_child_container, frag);
         transaction.commit();

@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.fragment;
+package com.jinwoo.ably.src.main.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,7 +20,7 @@ import com.jinwoo.ably.src.data.Product;
 
 import java.util.ArrayList;
 
-public class ChildFragment2 extends Fragment {
+public class TopFragment2 extends Fragment {
 
     private ImageView mTop;
     private ViewPager mViewPager;
@@ -29,16 +29,16 @@ public class ChildFragment2 extends Fragment {
     private ProductRecyclerAdapter productRecyclerAdapter;
     private ArrayList<Product> productList1, productList2;
 
-    public ChildFragment2() { }
+    public TopFragment2() { }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_child_2, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_top_2, container, false);
 
-        mTop = (ImageView) view.findViewById(R.id.child2_top);
-        mViewPager = (ViewPager) view.findViewById(R.id.child2_body1);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.child2_body2);
+        mTop = (ImageView) view.findViewById(R.id.top2_banner);
+        mViewPager = (ViewPager) view.findViewById(R.id.top2_body1);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.top2_body2);
 
         mTop.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -69,19 +69,6 @@ public class ChildFragment2 extends Fragment {
         productList2.add(new Product(R.drawable.img_product, 18000, "new item 8", "This is eighth product", "No sales info"));
 
         // First product list setting
-        mViewPager.setClipToPadding(false);
-        mViewPager.setClipChildren(false);
-        mViewPager.setOffscreenPageLimit(3);
-        int dpValue = 16;
-        float d = getResources().getDisplayMetrics().density;
-        int margin = (int) (dpValue * d);
-        mViewPager.setPadding(margin, 0, margin, 0);
-        mViewPager.setPageMargin(margin / 2);
-
-        for (int i = 0; i < productList1.size(); i++) {
-
-        }
-
         productSlideAdapter = new ProductSlideAdapter(productList1, getActivity());
         mViewPager.setAdapter(productSlideAdapter);
 

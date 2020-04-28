@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.fragment;
+package com.jinwoo.ably.src.main.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,15 +11,15 @@ import androidx.fragment.app.Fragment;
 
 import com.jinwoo.ably.R;
 
-public class ChildFragment4 extends Fragment {
+public class TopFragment3 extends Fragment {
 
-    public ChildFragment4() {
+    public TopFragment3() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_child_4, container, false);
+        return inflater.inflate(R.layout.fragment_top_3, container, false);
     }
 }

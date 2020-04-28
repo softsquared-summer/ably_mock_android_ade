@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/child2_top"
+            android:id="@+id/top2_banner"
             android:layout_width="match_parent"
             android:layout_height="130dp"
             android:scaleType="fitXY"
@@ -36,7 +36,7 @@
                 android:layout_marginStart="8dp"/>
 
             <androidx.viewpager.widget.ViewPager
-                android:id="@+id/child2_body1"
+                android:id="@+id/top2_body1"
                 android:layout_width="wrap_content"
                 android:layout_height="350dp"
                 android:padding="8dp" />
@@ -51,7 +51,7 @@
             android:layout_marginTop="8dp">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/child2_body2"
+                android:id="@+id/top2_body2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"

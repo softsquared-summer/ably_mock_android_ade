@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.fragment;
+package com.jinwoo.ably.src.main.fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,7 +22,7 @@ import com.jinwoo.ably.src.data.SlideBanner;
 import com.jinwoo.ably.src.main.MainActivity;
 import java.util.ArrayList;
 
-public class ChildFragment1 extends Fragment {
+public class TopFragment1 extends Fragment {
 
     private ImageView mTop;
     private ViewPager2 mMid;
@@ -33,17 +33,17 @@ public class ChildFragment1 extends Fragment {
     private ArrayList<Product> productList;
     private Handler slideHandler;
 
-    public ChildFragment1() { }
+    public TopFragment1() { }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_child_1, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_top_1, container, false);
 
-        mTop = (ImageView) view.findViewById(R.id.child1_top);
-        mMid = (ViewPager2) view.findViewById(R.id.child1_mid);
-        mPages = (TextView) view.findViewById(R.id.child1_tv_banner_pages);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.child1_body);
+        mTop = (ImageView) view.findViewById(R.id.top1_iv_banner1);
+        mMid = (ViewPager2) view.findViewById(R.id.top1_banner2);
+        mPages = (TextView) view.findViewById(R.id.top1_tv_banner_pages);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.top1_body);
 
         mTop.setOnClickListener(new View.OnClickListener(){
             @Override
