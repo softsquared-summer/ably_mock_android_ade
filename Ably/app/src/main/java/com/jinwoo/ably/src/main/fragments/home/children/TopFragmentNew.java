@@ -1,5 +1,6 @@
-package com.jinwoo.ably.src.main.fragments;
+package com.jinwoo.ably.src.main.fragments.home.children;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.jinwoo.ably.R;
-import com.jinwoo.ably.src.adapter.ProductRecyclerAdapter;
-import com.jinwoo.ably.src.adapter.ProductSlideAdapter;
-import com.jinwoo.ably.src.data.Product;
+import com.jinwoo.ably.src.main.adapter.ProductRecyclerAdapter;
+import com.jinwoo.ably.src.main.adapter.ProductSlideAdapter;
+import com.jinwoo.ably.src.main.data.Product;
 
 import java.util.ArrayList;
 
-public class TopFragment2 extends Fragment {
+public class TopFragmentNew extends Fragment {
 
     private ImageView mTop;
     private ViewPager mViewPager;
@@ -28,17 +29,19 @@ public class TopFragment2 extends Fragment {
     private ProductSlideAdapter productSlideAdapter;
     private ProductRecyclerAdapter productRecyclerAdapter;
     private ArrayList<Product> productList1, productList2;
+    private Context context;
 
-    public TopFragment2() { }
+    public TopFragmentNew() { }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_top_2, container, false);
 
-        mTop = (ImageView) view.findViewById(R.id.top2_banner);
-        mViewPager = (ViewPager) view.findViewById(R.id.top2_body1);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.top2_body2);
+        mTop = view.findViewById(R.id.top2_banner);
+        mViewPager = view.findViewById(R.id.top2_body1);
+        mRecyclerView = view.findViewById(R.id.top2_body2);
+        context = getActivity();
 
         mTop.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -69,11 +72,11 @@ public class TopFragment2 extends Fragment {
         productList2.add(new Product(R.drawable.img_product, 18000, "new item 8", "This is eighth product", "No sales info"));
 
         // First product list setting
-        productSlideAdapter = new ProductSlideAdapter(productList1, getActivity());
+        productSlideAdapter = new ProductSlideAdapter(productList1, context);
         mViewPager.setAdapter(productSlideAdapter);
 
         // Second product list setting
-        productRecyclerAdapter = new ProductRecyclerAdapter(productList2, getActivity());
+        productRecyclerAdapter = new ProductRecyclerAdapter(productList2, context);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         mRecyclerView.setAdapter(productRecyclerAdapter);

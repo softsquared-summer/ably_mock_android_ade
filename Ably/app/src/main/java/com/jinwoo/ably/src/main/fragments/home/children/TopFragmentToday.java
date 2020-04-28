@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.main.fragments;
+package com.jinwoo.ably.src.main.fragments.home.children;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,14 +15,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 import com.jinwoo.ably.R;
-import com.jinwoo.ably.src.adapter.ProductRecyclerAdapter;
-import com.jinwoo.ably.src.adapter.InfiniteSlideAdapter;
-import com.jinwoo.ably.src.data.Product;
-import com.jinwoo.ably.src.data.SlideBanner;
-import com.jinwoo.ably.src.main.MainActivity;
+import com.jinwoo.ably.src.main.adapter.ProductRecyclerAdapter;
+import com.jinwoo.ably.src.main.adapter.InfiniteSlideAdapter;
+import com.jinwoo.ably.src.main.data.Product;
+import com.jinwoo.ably.src.main.data.SlideBanner;
 import java.util.ArrayList;
 
-public class TopFragment1 extends Fragment {
+public class TopFragmentToday extends Fragment {
 
     private ImageView mTop;
     private ViewPager2 mMid;
@@ -33,17 +32,17 @@ public class TopFragment1 extends Fragment {
     private ArrayList<Product> productList;
     private Handler slideHandler;
 
-    public TopFragment1() { }
+    public TopFragmentToday() { }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_top_1, container, false);
 
-        mTop = (ImageView) view.findViewById(R.id.top1_iv_banner1);
-        mMid = (ViewPager2) view.findViewById(R.id.top1_banner2);
-        mPages = (TextView) view.findViewById(R.id.top1_tv_banner_pages);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.top1_body);
+        mTop = view.findViewById(R.id.top1_iv_banner1);
+        mMid = view.findViewById(R.id.top1_banner2);
+        mPages = view.findViewById(R.id.top1_tv_banner_pages);
+        mRecyclerView = view.findViewById(R.id.top1_body);
 
         mTop.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -74,7 +73,8 @@ public class TopFragment1 extends Fragment {
         });
 
         // Show current page
-        mPages.setText(mMid.getCurrentItem() + "/" + banners.size());
+        String currentPage = mMid.getCurrentItem() + "/" + banners.size();
+        mPages.setText(currentPage);
 
         //TODO: Networking required
         //Inserting product data into productList
@@ -90,7 +90,7 @@ public class TopFragment1 extends Fragment {
 
 
         mRecyclerView.setHasFixedSize(true);
-        productRecyclerAdapter = new ProductRecyclerAdapter(productList, (MainActivity)getActivity());
+        productRecyclerAdapter = new ProductRecyclerAdapter(productList, getActivity());
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         mRecyclerView.setAdapter(productRecyclerAdapter);
 

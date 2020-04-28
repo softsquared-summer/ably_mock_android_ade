@@ -11,7 +11,7 @@ import static com.jinwoo.ably.src.ApplicationClass.getRetrofit;
 class MainService {
     private final MainActivityView mMainActivityView;
 
-    MainService(final MainActivityView mainActivityView) {
+    public MainService(final MainActivityView mainActivityView) {
         this.mMainActivityView = mainActivityView;
     }
 

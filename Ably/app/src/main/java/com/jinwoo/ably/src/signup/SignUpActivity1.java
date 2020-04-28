@@ -19,7 +19,7 @@ public class SignUpActivity1 extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_1);
 
-        mExit = (ImageView) findViewById(R.id.signup1_iv_exit);
+        mExit = findViewById(R.id.signup1_iv_exit);
         mExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,7 +27,7 @@ public class SignUpActivity1 extends BaseActivity {
             }
         });
 
-        mSignupWithEmail = (Button) findViewById(R.id.signup1_btn_signup_with_email);
+        mSignupWithEmail = findViewById(R.id.signup1_btn_signup_with_email);
         mSignupWithEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

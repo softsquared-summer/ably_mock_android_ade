@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import com.jinwoo.ably.config.XAccessTokenInterceptor;
-import com.jinwoo.ably.src.data.Category;
+import com.jinwoo.ably.src.main.data.Category;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;

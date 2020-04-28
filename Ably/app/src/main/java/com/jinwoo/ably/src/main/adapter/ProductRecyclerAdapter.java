@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.adapter;
+package com.jinwoo.ably.src.main.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.jinwoo.ably.R;
-import com.jinwoo.ably.src.data.Product;
+import com.jinwoo.ably.src.main.data.Product;
 import com.jinwoo.ably.src.product.ProductActivity;
 
 import java.util.ArrayList;

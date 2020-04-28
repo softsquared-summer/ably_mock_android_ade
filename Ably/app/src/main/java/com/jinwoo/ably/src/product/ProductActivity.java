@@ -20,7 +20,7 @@ public class ProductActivity extends BaseActivity {
         //TODO: get product url from the intent and parse, map it onto the UI of this activity
         Intent intent = getIntent();
 
-        mBack = (ImageView) findViewById(R.id.product_iv_back);
+        mBack = findViewById(R.id.product_iv_back);
         mBack.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

@@ -20,56 +20,38 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.ApplicationClass;
 import com.jinwoo.ably.src.BaseActivity;
-import com.jinwoo.ably.src.adapter.DrawerListAdapter;
-import com.jinwoo.ably.src.main.fragments.BottomFragment1;
-import com.jinwoo.ably.src.main.fragments.BottomFragment2;
-import com.jinwoo.ably.src.main.fragments.BottomFragment3;
-import com.jinwoo.ably.src.main.fragments.BottomFragment4;
-import com.jinwoo.ably.src.main.fragments.BottomFragment5;
+import com.jinwoo.ably.src.main.adapter.DrawerListAdapter;
+import com.jinwoo.ably.src.main.fragments.home.BottomFragmentHome;
+import com.jinwoo.ably.src.main.fragments.style.BottomFragmentStyle;
+import com.jinwoo.ably.src.main.fragments.market.BottomFragmentMarket;
+import com.jinwoo.ably.src.main.fragments.pick.BottomFragmentPick;
+import com.jinwoo.ably.src.main.fragments.mypage.BottomFragmentMyPage;
 import com.jinwoo.ably.src.login.LoginActivity;
 import com.jinwoo.ably.src.signup.SignUpActivity1;
 
-public class MainActivity extends BaseActivity /*implements MainActivityView*/ {
-    private MainService mMainService;
+public class MainActivity extends BaseActivity {
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private View mDrawerView;
     private BottomNavigationView mBottomNavigationView;
     private ImageView mDrawerMenuButton;
-    private EditText mSearchbar;
+    private EditText mSearchBar;
     private LinearLayout mMenuTitle;
     private TextView mSeeMoreBenefits, mTitle;
-    private Button mLogin, mSignin, mPoint, mCoupon, mDelivery, mSupport;
+    private Button mLogin, mSignIn, mPoint, mCoupon, mDelivery, mSupport;
     private FragmentTransaction mFragmentTransaction;
-    private ExpandableListView mDrawerListview;
+    private ExpandableListView mDrawerListView;
     private DrawerListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //mMainService = new MainService(this);
-        mToolbar = (Toolbar) findViewById(R.id.main_Toolbar);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
-        mDrawerView = (View) findViewById(R.id.drawer_drawer);
-        mBottomNavigationView = (BottomNavigationView) findViewById(R.id.main_bottom_navigation);
-        mDrawerMenuButton = (ImageView) findViewById(R.id.main_iv_menu);
-        mSearchbar = (EditText) findViewById(R.id.main_et_search_bar);
-        mMenuTitle = (LinearLayout) findViewById(R.id.main_top_detail);
-        mTitle = (TextView) findViewById(R.id.main_top_detail_title);
-        mSeeMoreBenefits = (TextView) findViewById(R.id.drawer_tv_see_more_benefits);
-        mLogin = (Button) findViewById(R.id.drawer_login);
-        mSignin = (Button) findViewById(R.id.drawer_signin);
-        mPoint = (Button) findViewById(R.id.drawer_point);
-        mCoupon = (Button) findViewById(R.id.drawer_coupon);
-        mDelivery = (Button) findViewById(R.id.drawer_delivery);
-        mSupport = (Button) findViewById(R.id.drawer_support);
-        mDrawerListview = (ExpandableListView) findViewById(R.id.drawer_listview);
+        mapWidgets();
 
         // Initializing drawer listview
         adapter = new DrawerListAdapter(getApplicationContext(), R.layout.item_parent, R.layout.item_child, ApplicationClass.getCategories());
-        mDrawerListview.setAdapter(adapter);
+        mDrawerListView.setAdapter(adapter);
 
         setSupportActionBar(mToolbar);
 
@@ -85,6 +67,7 @@ public class MainActivity extends BaseActivity /*implements MainActivityView*/ {
         mDrawerView.setOnTouchListener(new View.OnTouchListener(){
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                v.performClick();
                 return true;
             }
         });
@@ -105,7 +88,7 @@ public class MainActivity extends BaseActivity /*implements MainActivityView*/ {
                 }
             });
 
-            mSignin.setOnClickListener(new View.OnClickListener() {
+            mSignIn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(MainActivity.this, SignUpActivity1.class));
@@ -142,9 +125,9 @@ public class MainActivity extends BaseActivity /*implements MainActivityView*/ {
         }
 
         // Body fragment initial setting
-        mSearchbar.setVisibility(View.VISIBLE);
+        mSearchBar.setVisibility(View.VISIBLE);
         mMenuTitle.setVisibility(View.INVISIBLE);
-        BottomFragment1 frag = new BottomFragment1();
+        BottomFragmentHome frag = new BottomFragmentHome();
         mFragmentTransaction = getSupportFragmentManager().beginTransaction();
         mFragmentTransaction.add(R.id.main_parent_container, frag);
         mFragmentTransaction.commit();
@@ -155,43 +138,62 @@ public class MainActivity extends BaseActivity /*implements MainActivityView*/ {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.bottom_home:
-                        mSearchbar.setVisibility(View.VISIBLE);
+                        mSearchBar.setVisibility(View.VISIBLE);
                         mMenuTitle.setVisibility(View.INVISIBLE);
-                        BottomFragment1 fragment1 = new BottomFragment1();
+                        BottomFragmentHome fragment1 = new BottomFragmentHome();
                         changeFragment(fragment1);
                         break;
                     case R.id.bottom_style:
-                        mSearchbar.setVisibility(View.INVISIBLE);
+                        mSearchBar.setVisibility(View.INVISIBLE);
                         mMenuTitle.setVisibility(View.VISIBLE);
                         mTitle.setText("스타일");
-                        BottomFragment2 fragment2 = new BottomFragment2();
+                        BottomFragmentStyle fragment2 = new BottomFragmentStyle();
                         changeFragment(fragment2);
                         break;
                     case R.id.bottom_market:
-                        mSearchbar.setVisibility(View.INVISIBLE);
+                        mSearchBar.setVisibility(View.INVISIBLE);
                         mMenuTitle.setVisibility(View.VISIBLE);
                         mTitle.setText("마켓");
-                        BottomFragment3 fragment3 = new BottomFragment3();
+                        BottomFragmentMarket fragment3 = new BottomFragmentMarket();
                         changeFragment(fragment3);
                         break;
                     case R.id.bottom_favorite:
-                        mSearchbar.setVisibility(View.INVISIBLE);
+                        mSearchBar.setVisibility(View.INVISIBLE);
                         mMenuTitle.setVisibility(View.VISIBLE);
                         mTitle.setText("찜");
-                        BottomFragment4 fragment4 = new BottomFragment4();
+                        BottomFragmentPick fragment4 = new BottomFragmentPick();
                         changeFragment(fragment4);
                         break;
                     case R.id.bottom_my_page:
-                        mSearchbar.setVisibility(View.INVISIBLE);
+                        mSearchBar.setVisibility(View.INVISIBLE);
                         mMenuTitle.setVisibility(View.VISIBLE);
                         mTitle.setText("마이페이지");
-                        BottomFragment5 fragment5 = new BottomFragment5();
+                        BottomFragmentMyPage fragment5 = new BottomFragmentMyPage();
                         changeFragment(fragment5);
                         break;
                 }
                 return true;
             }
         });
+    }
+
+    private void mapWidgets() {
+        mToolbar = findViewById(R.id.main_Toolbar);
+        mDrawerLayout = findViewById(R.id.main_drawer_layout);
+        mDrawerView = findViewById(R.id.drawer_drawer);
+        mBottomNavigationView = findViewById(R.id.main_bottom_navigation);
+        mDrawerMenuButton = findViewById(R.id.main_iv_menu);
+        mSearchBar = findViewById(R.id.main_et_search_bar);
+        mMenuTitle = findViewById(R.id.main_top_detail);
+        mTitle = findViewById(R.id.main_top_detail_title);
+        mSeeMoreBenefits = findViewById(R.id.drawer_tv_see_more_benefits);
+        mLogin = findViewById(R.id.drawer_login);
+        mSignIn = findViewById(R.id.drawer_signin);
+        mPoint = findViewById(R.id.drawer_point);
+        mCoupon = findViewById(R.id.drawer_coupon);
+        mDelivery = findViewById(R.id.drawer_delivery);
+        mSupport = findViewById(R.id.drawer_support);
+        mDrawerListView = findViewById(R.id.drawer_listview);
     }
 
     private void changeFragment(Fragment fragment) {
@@ -219,31 +221,4 @@ public class MainActivity extends BaseActivity /*implements MainActivityView*/ {
         else
             finish();
     }
-//
-//    private void tryGetTest() {
-//        showProgressDialog();
-//        mMainService.getTest();
-//    }
-//
-//    private void tryPostSignIn() {
-//        showProgressDialog();
-//        mMainService.postSignIn("id", "pw");
-//    }
-//
-//    @Override
-//    public void validateSuccess(String text) {
-//        hideProgressDialog();
-//    }
-//
-//    @Override
-//    public void validateFailure(@Nullable String message) {
-//        hideProgressDialog();
-//        showCustomToast(message == null || message.isEmpty() ? getString(R.string.network_error) : message);
-//    }
-//
-//    @Override
-//    public void signInSuccess(SignInResponse.SignInResult signInResult) {
-//        hideProgressDialog();
-//        // What to do when sign in succeeds
-//    }
 }

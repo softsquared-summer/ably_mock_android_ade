@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.adapter;
+package com.jinwoo.ably.src.main.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 import com.jinwoo.ably.R;
-import com.jinwoo.ably.src.data.SlideBanner;
+import com.jinwoo.ably.src.main.data.SlideBanner;
 import java.util.ArrayList;
 
 public class InfiniteSlideAdapter extends RecyclerView.Adapter<InfiniteSlideAdapter.SliderViewHolder> {

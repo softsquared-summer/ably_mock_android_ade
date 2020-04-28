@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.data;
+package com.jinwoo.ably.src.main.data;
 
 public class SlideBanner {
 

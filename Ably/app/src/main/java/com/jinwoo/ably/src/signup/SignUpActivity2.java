@@ -25,15 +25,7 @@ public class SignUpActivity2 extends BaseActivity implements SignUpActivityView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_2);
         mSignUpService = new SignUpService(SignUpActivity2.this);
-
-        mBack = (ImageView) findViewById(R.id.signup2_iv_back);
-        mEmail = (EditText) findViewById(R.id.signup2_et_email);
-        mPassword = (EditText) findViewById(R.id.signup2_et_password);
-        mPasswordConfirm = (EditText) findViewById(R.id.signup2_et_password_confirm);
-        mName = (EditText) findViewById(R.id.signup2_et_name);
-        mPhone = (EditText) findViewById(R.id.signup2_et_phone);
-        mAuthenticate = (Button) findViewById(R.id.signup2_btn_auth);
-        mSignup = (Button) findViewById(R.id.signup2_btn_signup);
+        mapWidgets();
 
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +57,24 @@ public class SignUpActivity2 extends BaseActivity implements SignUpActivityView 
                 tryPostSignUp(signUpBody);
             }
         });
+
+        mAuthenticate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private void mapWidgets(){
+        mBack = findViewById(R.id.signup2_iv_back);
+        mEmail = findViewById(R.id.signup2_et_email);
+        mPassword = findViewById(R.id.signup2_et_password);
+        mPasswordConfirm = findViewById(R.id.signup2_et_password_confirm);
+        mName = findViewById(R.id.signup2_et_name);
+        mPhone = findViewById(R.id.signup2_et_phone);
+        mAuthenticate = findViewById(R.id.signup2_btn_auth);
+        mSignup = findViewById(R.id.signup2_btn_signup);
     }
 
     private void tryPostSignUp(SignUpBody signUpBody) {
