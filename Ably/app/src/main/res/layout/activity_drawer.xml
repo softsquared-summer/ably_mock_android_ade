@@ -80,28 +80,28 @@
             android:id="@+id/drawer_point"
             android:layout_width="78dp"
             android:layout_height="78dp"
-            android:background="@drawable/button_point"/>
+            android:background="@drawable/icon_point"/>
 
         <Button
             android:id="@+id/drawer_coupon"
             android:layout_width="78dp"
             android:layout_height="78dp"
             android:layout_marginLeft="2dp"
-            android:background="@drawable/button_coupon"/>
+            android:background="@drawable/icon_coupon"/>
 
         <Button
             android:id="@+id/drawer_delivery"
             android:layout_width="78dp"
             android:layout_height="78dp"
             android:layout_marginLeft="2dp"
-            android:background="@drawable/button_delivery"/>
+            android:background="@drawable/icon_delivery"/>
 
         <Button
             android:id="@+id/drawer_support"
             android:layout_width="78dp"
             android:layout_height="78dp"
             android:layout_marginLeft="2dp"
-            android:background="@drawable/button_support"/>
+            android:background="@drawable/icon_support"/>
 
     </LinearLayout>
 

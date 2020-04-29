@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -30,7 +29,6 @@ import com.jinwoo.ably.src.login.LoginActivity;
 import com.jinwoo.ably.src.signup.SignUpActivity1;
 
 public class MainActivity extends BaseActivity {
-    private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private View mDrawerView;
     private BottomNavigationView mBottomNavigationView;
@@ -41,7 +39,7 @@ public class MainActivity extends BaseActivity {
     private Button mLogin, mSignIn, mPoint, mCoupon, mDelivery, mSupport;
     private FragmentTransaction mFragmentTransaction;
     private ExpandableListView mDrawerListView;
-    private DrawerListAdapter adapter;
+    private DrawerListAdapter mDrawerListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +48,8 @@ public class MainActivity extends BaseActivity {
         mapWidgets();
 
         // Initializing drawer listview
-        adapter = new DrawerListAdapter(getApplicationContext(), R.layout.item_parent, R.layout.item_child, ApplicationClass.getCategories());
-        mDrawerListView.setAdapter(adapter);
-
-        setSupportActionBar(mToolbar);
+        mDrawerListAdapter = new DrawerListAdapter(getApplicationContext(), R.layout.item_category_parent, R.layout.item_category_child, ApplicationClass.getCategories());
+        mDrawerListView.setAdapter(mDrawerListAdapter);
 
         // Drawer navigation bar setting
         mDrawerMenuButton.setOnClickListener(new View.OnClickListener() {
@@ -127,9 +123,8 @@ public class MainActivity extends BaseActivity {
         // Body fragment initial setting
         mSearchBar.setVisibility(View.VISIBLE);
         mMenuTitle.setVisibility(View.INVISIBLE);
-        BottomFragmentHome frag = new BottomFragmentHome();
         mFragmentTransaction = getSupportFragmentManager().beginTransaction();
-        mFragmentTransaction.add(R.id.main_parent_container, frag);
+        mFragmentTransaction.add(R.id.main_parent_container, new BottomFragmentHome());
         mFragmentTransaction.commit();
 
         // Bottom navigation bar
@@ -140,36 +135,31 @@ public class MainActivity extends BaseActivity {
                     case R.id.bottom_home:
                         mSearchBar.setVisibility(View.VISIBLE);
                         mMenuTitle.setVisibility(View.INVISIBLE);
-                        BottomFragmentHome fragment1 = new BottomFragmentHome();
-                        changeFragment(fragment1);
+                        changeFragment(new BottomFragmentHome());
                         break;
                     case R.id.bottom_style:
                         mSearchBar.setVisibility(View.INVISIBLE);
                         mMenuTitle.setVisibility(View.VISIBLE);
                         mTitle.setText("스타일");
-                        BottomFragmentStyle fragment2 = new BottomFragmentStyle();
-                        changeFragment(fragment2);
+                        changeFragment( new BottomFragmentStyle());
                         break;
                     case R.id.bottom_market:
                         mSearchBar.setVisibility(View.INVISIBLE);
                         mMenuTitle.setVisibility(View.VISIBLE);
                         mTitle.setText("마켓");
-                        BottomFragmentMarket fragment3 = new BottomFragmentMarket();
-                        changeFragment(fragment3);
+                        changeFragment(new BottomFragmentMarket());
                         break;
                     case R.id.bottom_favorite:
                         mSearchBar.setVisibility(View.INVISIBLE);
                         mMenuTitle.setVisibility(View.VISIBLE);
                         mTitle.setText("찜");
-                        BottomFragmentPick fragment4 = new BottomFragmentPick();
-                        changeFragment(fragment4);
+                        changeFragment(new BottomFragmentPick());
                         break;
                     case R.id.bottom_my_page:
                         mSearchBar.setVisibility(View.INVISIBLE);
                         mMenuTitle.setVisibility(View.VISIBLE);
                         mTitle.setText("마이페이지");
-                        BottomFragmentMyPage fragment5 = new BottomFragmentMyPage();
-                        changeFragment(fragment5);
+                        changeFragment(new BottomFragmentMyPage());
                         break;
                 }
                 return true;
@@ -178,7 +168,6 @@ public class MainActivity extends BaseActivity {
     }
 
     private void mapWidgets() {
-        mToolbar = findViewById(R.id.main_Toolbar);
         mDrawerLayout = findViewById(R.id.main_drawer_layout);
         mDrawerView = findViewById(R.id.drawer_drawer);
         mBottomNavigationView = findViewById(R.id.main_bottom_navigation);

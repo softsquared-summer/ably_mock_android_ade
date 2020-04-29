@@ -2,63 +2,100 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingTop="16dp"
     android:paddingBottom="32dp">
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/item_product_iv_image"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/img_product"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/img_product_1"
+        app:riv_corner_radius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/item_product_iv_heart"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/icon_hollow_heart_white"
+        app:layout_constraintEnd_toEndOf="@+id/item_product_iv_image"
+        app:layout_constraintTop_toTopOf="@+id/item_product_iv_image" />
+
+    <TextView
+        android:id="@+id/item_product_tv_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="10%"
+        android:textColor="@color/colorRedPink"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/item_product_iv_image"
+        app:layout_constraintTop_toBottomOf="@+id/item_product_iv_image" />
 
     <TextView
         android:id="@+id/item_product_tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="99,999"
-        android:textColor="@color/colorBlack"
-        android:textSize="20dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/item_product_iv_image"
+        android:text="99999"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/item_product_tv_discount"
         app:layout_constraintTop_toBottomOf="@+id/item_product_iv_image" />
 
     <TextView
-        android:id="@+id/item_product_tv_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/item_product_tv_market"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:text="product name"
-        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textSize="15dp"
         android:textColor="@color/colorGrey"
-        android:layout_marginTop="16dp"
+        android:singleLine="true"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/item_product_iv_image"
         app:layout_constraintTop_toBottomOf="@+id/item_product_tv_price" />
 
     <TextView
-        android:id="@+id/item_product_tv_description"
-        android:layout_width="wrap_content"
+        android:id="@+id/item_product_tv_name"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:singleLine="true"
         android:text="product description blah blah"
-        android:textSize="15dp"
         android:textColor="@color/colorGrey"
-        android:layout_marginTop="8dp"
+        android:textSize="11dp"
         app:layout_constraintStart_toStartOf="@+id/item_product_iv_image"
-        app:layout_constraintTop_toBottomOf="@+id/item_product_tv_name" />
+        app:layout_constraintTop_toBottomOf="@+id/item_product_tv_market" />
 
 
     <TextView
         android:id="@+id/item_product_tv_sales"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="sales amount"
-        android:textSize="15dp"
         android:textColor="@color/colorLightGrey"
-        android:layout_marginTop="16dp"
+        android:textSize="11dp"
         app:layout_constraintStart_toStartOf="@+id/item_product_iv_image"
-        app:layout_constraintTop_toBottomOf="@+id/item_product_tv_description" />
-    
+        app:layout_constraintTop_toBottomOf="@+id/item_product_tv_name" />
+
+    <ImageView
+        android:id="@+id/item_product_iv_tag"
+        android:layout_width="30dp"
+        android:layout_height="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_product_tv_sales"
+        app:layout_constraintStart_toStartOf="@+id/item_product_iv_image"
+        app:layout_constraintTop_toTopOf="@+id/item_product_tv_sales"
+        app:srcCompat="@drawable/img_new" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

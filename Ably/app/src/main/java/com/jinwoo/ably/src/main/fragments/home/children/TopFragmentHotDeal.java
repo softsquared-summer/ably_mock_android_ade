@@ -13,13 +13,11 @@ import com.jinwoo.ably.R;
 
 public class TopFragmentHotDeal extends Fragment {
 
-    public TopFragmentHotDeal() {
-
-    }
+    public TopFragmentHotDeal() {}
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_top_4, container, false);
+        return inflater.inflate(R.layout.fragment_top_hotdeal, container, false);
     }
 }

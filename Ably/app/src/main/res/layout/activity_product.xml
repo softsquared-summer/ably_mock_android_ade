@@ -166,7 +166,7 @@
                 android:id="@+id/product_iv_heart"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/icon_heart" />
+                android:src="@drawable/icon_hollow_heart_pink" />
 
             <TextView
                 android:id="@+id/product_tv_likes"

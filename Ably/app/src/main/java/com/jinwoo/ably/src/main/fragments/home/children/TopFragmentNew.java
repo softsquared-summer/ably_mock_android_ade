@@ -13,12 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.main.adapter.ProductRecyclerAdapter;
 import com.jinwoo.ably.src.main.adapter.ProductSlideAdapter;
 import com.jinwoo.ably.src.main.data.Product;
-
 import java.util.ArrayList;
 
 public class TopFragmentNew extends Fragment {
@@ -36,11 +34,11 @@ public class TopFragmentNew extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_top_2, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_top_new, container, false);
 
-        mTop = view.findViewById(R.id.top2_banner);
-        mViewPager = view.findViewById(R.id.top2_body1);
-        mRecyclerView = view.findViewById(R.id.top2_body2);
+        mTop = view.findViewById(R.id.new_iv_banner);
+        mViewPager = view.findViewById(R.id.new_body1);
+        mRecyclerView = view.findViewById(R.id.new_body2);
         context = getActivity();
 
         mTop.setOnClickListener(new View.OnClickListener(){
@@ -53,23 +51,28 @@ public class TopFragmentNew extends Fragment {
         //TODO: Networking required
         //Inserting product data into productList
         productList1 = new ArrayList<>();
-        productList1.add(new Product(R.drawable.img_product, 10000, "best item 1", "This is first product", "No sales info"));
-        productList1.add(new Product(R.drawable.img_product, 11000, "best item 2", "This is second product", "No sales info"));
-        productList1.add(new Product(R.drawable.img_product, 13000, "best item 3", "This is third product", "No sales info"));
-        productList1.add(new Product(R.drawable.img_product, 14000, "best item 4", "This is fourth product", "No sales info"));
-        productList1.add(new Product(R.drawable.img_product, 15000, "best item 5", "This is fifth product", "No sales info"));
-        productList1.add(new Product(R.drawable.img_product, 16000, "best item 6", "This is sixth product", "No sales info"));
-        productList1.add(new Product(R.drawable.img_product, 17000, "best item 7", "This is seventh product", "No sales info"));
-        productList1.add(new Product(R.drawable.img_product, 18000, "best item 8", "This is eighth product", "No sales info"));
+        ArrayList<Integer> photos = new ArrayList<>();
+        photos.add(R.drawable.img_product_1);
+        photos.add(R.drawable.img_product_2);
+        photos.add(R.drawable.img_product_3);
+        photos.add(R.drawable.img_product_4);
+        productList1.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
+        productList1.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
+        productList1.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "", "1,464개 구매중"));
+        productList1.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
+        productList1.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
+        productList1.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "", "1,464개 구매중"));
+        productList1.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
+        productList1.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
         productList2 = new ArrayList<>();
-        productList2.add(new Product(R.drawable.img_product, 10000, "new item 1", "This is first product", "No sales info"));
-        productList2.add(new Product(R.drawable.img_product, 11000, "new item 2", "This is second product", "No sales info"));
-        productList2.add(new Product(R.drawable.img_product, 13000, "new item 3", "This is third product", "No sales info"));
-        productList2.add(new Product(R.drawable.img_product, 14000, "new item 4", "This is fourth product", "No sales info"));
-        productList2.add(new Product(R.drawable.img_product, 15000, "new item 5", "This is fifth product", "No sales info"));
-        productList2.add(new Product(R.drawable.img_product, 16000, "new item 6", "This is sixth product", "No sales info"));
-        productList2.add(new Product(R.drawable.img_product, 17000, "new item 7", "This is seventh product", "No sales info"));
-        productList2.add(new Product(R.drawable.img_product, 18000, "new item 8", "This is eighth product", "No sales info"));
+        productList2.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
+        productList2.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
+        productList2.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "", "1,464개 구매중"));
+        productList2.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
+        productList2.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
+        productList2.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "", "1,464개 구매중"));
+        productList2.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
+        productList2.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
 
         // First product list setting
         productSlideAdapter = new ProductSlideAdapter(productList1, context);
@@ -77,7 +80,7 @@ public class TopFragmentNew extends Fragment {
 
         // Second product list setting
         productRecyclerAdapter = new ProductRecyclerAdapter(productList2, context);
-        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         mRecyclerView.setAdapter(productRecyclerAdapter);
 

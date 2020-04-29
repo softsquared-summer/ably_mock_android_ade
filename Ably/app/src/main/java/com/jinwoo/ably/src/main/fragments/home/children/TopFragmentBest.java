@@ -13,13 +13,11 @@ import com.jinwoo.ably.R;
 
 public class TopFragmentBest extends Fragment {
 
-    public TopFragmentBest() {
-
-    }
+    public TopFragmentBest() {}
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_top_3, container, false);
+        return inflater.inflate(R.layout.fragment_top_best, container, false);
     }
 }

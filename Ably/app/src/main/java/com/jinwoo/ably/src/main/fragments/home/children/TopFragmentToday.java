@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.main.adapter.ProductRecyclerAdapter;
-import com.jinwoo.ably.src.main.adapter.InfiniteSlideAdapter;
+import com.jinwoo.ably.src.main.adapter.BannerSlideAdapter;
 import com.jinwoo.ably.src.main.data.Product;
 import com.jinwoo.ably.src.main.data.SlideBanner;
 import java.util.ArrayList;
@@ -27,22 +27,23 @@ public class TopFragmentToday extends Fragment {
     private ViewPager2 mMid;
     private TextView mPages;
     private RecyclerView mRecyclerView;
-    private ProductRecyclerAdapter productRecyclerAdapter;
-    private InfiniteSlideAdapter infiniteSlideAdapter;
+    private ProductRecyclerAdapter mProductRecyclerAdapter;
+    private BannerSlideAdapter mBannerSlideAdapter;
     private ArrayList<Product> productList;
-    private Handler slideHandler;
+    private ArrayList<SlideBanner> banners;
+    private Handler mSlideHandler;
 
     public TopFragmentToday() { }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_top_1, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_top_today, container, false);
 
-        mTop = view.findViewById(R.id.top1_iv_banner1);
-        mMid = view.findViewById(R.id.top1_banner2);
-        mPages = view.findViewById(R.id.top1_tv_banner_pages);
-        mRecyclerView = view.findViewById(R.id.top1_body);
+        mTop = view.findViewById(R.id.today_iv_banner1);
+        mMid = view.findViewById(R.id.today_banner2);
+        mPages = view.findViewById(R.id.today_tv_banner_pages);
+        mRecyclerView = view.findViewById(R.id.today_body);
 
         mTop.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -52,47 +53,56 @@ public class TopFragmentToday extends Fragment {
         });
 
         // Banner slider setting
-        ArrayList<SlideBanner> banners = new ArrayList<>();
-        banners.add(new SlideBanner(R.drawable.img_banner1));
-        banners.add(new SlideBanner(R.drawable.img_banner2));
-        banners.add(new SlideBanner(R.drawable.img_banner3));
-        banners.add(new SlideBanner(R.drawable.img_banner4));
-        banners.add(new SlideBanner(R.drawable.img_banner5));
-        infiniteSlideAdapter = new InfiniteSlideAdapter(mMid, banners);
-        mMid.setAdapter(infiniteSlideAdapter);
+        banners = new ArrayList<>();
+        banners.add(new SlideBanner(R.drawable.img_banner_01));
+        banners.add(new SlideBanner(R.drawable.img_banner_02));
+        banners.add(new SlideBanner(R.drawable.img_banner_03));
+        banners.add(new SlideBanner(R.drawable.img_banner_04));
+        banners.add(new SlideBanner(R.drawable.img_banner_05));
+        banners.add(new SlideBanner(R.drawable.img_banner_06));
+        banners.add(new SlideBanner(R.drawable.img_banner_07));
+        banners.add(new SlideBanner(R.drawable.img_banner_08));
+        banners.add(new SlideBanner(R.drawable.img_banner_09));
+        banners.add(new SlideBanner(R.drawable.img_banner_10));
+        mBannerSlideAdapter = new BannerSlideAdapter(banners);
+        mMid.setAdapter(mBannerSlideAdapter);
 
         // Slide banner auto scrolling
-        slideHandler = new Handler();
+        mSlideHandler = new Handler();
         mMid.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                slideHandler.removeCallbacks(slideRunnable);
-                slideHandler.postDelayed(slideRunnable, 3000);
+
+                mSlideHandler.removeCallbacks(slideRunnable);
+                mSlideHandler.postDelayed(slideRunnable, 3000);
+
+                String currentPage = (mMid.getCurrentItem() + 1) + "/" + banners.size();
+                mPages.setText(currentPage);
             }
         });
-
-        // Show current page
-        String currentPage = mMid.getCurrentItem() + "/" + banners.size();
-        mPages.setText(currentPage);
 
         //TODO: Networking required
         //Inserting product data into productList
         productList = new ArrayList<>();
-        productList.add(new Product(R.drawable.img_product, 10000, "product p1", "This is first product", "No sales info"));
-        productList.add(new Product(R.drawable.img_product, 11000, "product p2", "This is second product", "No sales info"));
-        productList.add(new Product(R.drawable.img_product, 13000, "product p3", "This is third product", "No sales info"));
-        productList.add(new Product(R.drawable.img_product, 14000, "product p4", "This is fourth product", "No sales info"));
-        productList.add(new Product(R.drawable.img_product, 15000, "product p5", "This is fifth product", "No sales info"));
-        productList.add(new Product(R.drawable.img_product, 16000, "product p6", "This is sixth product", "No sales info"));
-        productList.add(new Product(R.drawable.img_product, 17000, "product p7", "This is seventh product", "No sales info"));
-        productList.add(new Product(R.drawable.img_product, 18000, "product p8", "This is eighth product", "No sales info"));
-
+        ArrayList<Integer> photos = new ArrayList<>();
+        photos.add(R.drawable.img_product_1);
+        photos.add(R.drawable.img_product_2);
+        photos.add(R.drawable.img_product_3);
+        photos.add(R.drawable.img_product_4);
+        productList.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
+        productList.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
+        productList.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "", "1,464개 구매중"));
+        productList.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
+        productList.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
+        productList.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "", "1,464개 구매중"));
+        productList.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
+        productList.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출구:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
 
         mRecyclerView.setHasFixedSize(true);
-        productRecyclerAdapter = new ProductRecyclerAdapter(productList, getActivity());
+        mProductRecyclerAdapter = new ProductRecyclerAdapter(productList, getActivity());
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        mRecyclerView.setAdapter(productRecyclerAdapter);
+        mRecyclerView.setAdapter(mProductRecyclerAdapter);
 
         return view;
     }
@@ -101,18 +111,28 @@ public class TopFragmentToday extends Fragment {
         @Override
         public void run() {
             mMid.setCurrentItem(mMid.getCurrentItem() + 1);
+
+            // If current page is the last, set it to 0 after 3 seconds
+            if (mMid.getCurrentItem() == banners.size() - 1) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mMid.setCurrentItem(0);
+                    }
+                },3000);
+            }
         }
     };
 
     @Override
     public void onPause() {
         super.onPause();
-        slideHandler.removeCallbacks(slideRunnable);
+        mSlideHandler.removeCallbacks(slideRunnable);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        slideHandler.postDelayed(slideRunnable, 3000);
+        mSlideHandler.postDelayed(slideRunnable, 3000);
     }
 }
