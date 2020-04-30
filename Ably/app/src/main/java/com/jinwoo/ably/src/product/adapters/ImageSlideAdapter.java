@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.main.adapter;
+package com.jinwoo.ably.src.product.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,16 +6,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.main.data.SlideImage;
 import java.util.ArrayList;
 
-public class BannerSlideAdapter extends RecyclerView.Adapter<BannerSlideAdapter.SliderViewHolder> {
+public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideAdapter.SliderViewHolder> {
 
     private ArrayList<SlideImage> itemList;
 
-    public BannerSlideAdapter(ArrayList<SlideImage> itemList) {
+    public ImageSlideAdapter(ArrayList<SlideImage> itemList) {
         this.itemList = itemList;
     }
 

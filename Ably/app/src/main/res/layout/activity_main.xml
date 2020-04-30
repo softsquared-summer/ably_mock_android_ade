@@ -122,10 +122,10 @@
             app:itemTextColor="@color/bottom_selection_color"
             app:labelVisibilityMode="labeled"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-            app:menu="@menu/menu_bottom_navigation" />
+            app:menu="@menu/menu_main_bottom_navigation" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <include layout="@layout/activity_drawer" />
+    <include layout="@layout/drawer_main" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

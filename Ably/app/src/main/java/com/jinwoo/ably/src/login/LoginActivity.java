@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.BaseActivity;
-import com.jinwoo.ably.src.signup.SignUpActivity2;
+import com.jinwoo.ably.src.signup.SignUpWithEmailActivity;
 
 public class LoginActivity extends BaseActivity {
 
@@ -32,7 +32,7 @@ public class LoginActivity extends BaseActivity {
         mSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity2.class));
+                startActivity(new Intent(LoginActivity.this, SignUpWithEmailActivity.class));
                 finish();
             }
         });

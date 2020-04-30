@@ -20,13 +20,13 @@ import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.ApplicationClass;
 import com.jinwoo.ably.src.BaseActivity;
 import com.jinwoo.ably.src.main.adapter.DrawerListAdapter;
-import com.jinwoo.ably.src.main.fragments.home.BottomFragmentHome;
-import com.jinwoo.ably.src.main.fragments.style.BottomFragmentStyle;
-import com.jinwoo.ably.src.main.fragments.market.BottomFragmentMarket;
-import com.jinwoo.ably.src.main.fragments.pick.BottomFragmentPick;
-import com.jinwoo.ably.src.main.fragments.mypage.BottomFragmentMyPage;
+import com.jinwoo.ably.src.main.fragments.home.FragmentHome;
+import com.jinwoo.ably.src.main.fragments.style.FragmentStyle;
+import com.jinwoo.ably.src.main.fragments.market.FragmentMarket;
+import com.jinwoo.ably.src.main.fragments.pick.FragmentPick;
+import com.jinwoo.ably.src.main.fragments.mypage.FragmentMyPage;
 import com.jinwoo.ably.src.login.LoginActivity;
-import com.jinwoo.ably.src.signup.SignUpActivity1;
+import com.jinwoo.ably.src.signup.SignUpHomeActivity;
 
 public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
@@ -87,7 +87,7 @@ public class MainActivity extends BaseActivity {
             mSignIn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, SignUpActivity1.class));
+                    startActivity(new Intent(MainActivity.this, SignUpHomeActivity.class));
                 }
             });
 
@@ -124,7 +124,7 @@ public class MainActivity extends BaseActivity {
         mSearchBar.setVisibility(View.VISIBLE);
         mMenuTitle.setVisibility(View.INVISIBLE);
         mFragmentTransaction = getSupportFragmentManager().beginTransaction();
-        mFragmentTransaction.add(R.id.main_parent_container, new BottomFragmentHome());
+        mFragmentTransaction.add(R.id.main_parent_container, new FragmentHome());
         mFragmentTransaction.commit();
 
         // Bottom navigation bar
@@ -135,31 +135,31 @@ public class MainActivity extends BaseActivity {
                     case R.id.bottom_home:
                         mSearchBar.setVisibility(View.VISIBLE);
                         mMenuTitle.setVisibility(View.INVISIBLE);
-                        changeFragment(new BottomFragmentHome());
+                        changeFragment(new FragmentHome());
                         break;
                     case R.id.bottom_style:
                         mSearchBar.setVisibility(View.INVISIBLE);
                         mMenuTitle.setVisibility(View.VISIBLE);
                         mTitle.setText("스타일");
-                        changeFragment( new BottomFragmentStyle());
+                        changeFragment( new FragmentStyle());
                         break;
                     case R.id.bottom_market:
                         mSearchBar.setVisibility(View.INVISIBLE);
                         mMenuTitle.setVisibility(View.VISIBLE);
                         mTitle.setText("마켓");
-                        changeFragment(new BottomFragmentMarket());
+                        changeFragment(new FragmentMarket());
                         break;
                     case R.id.bottom_favorite:
                         mSearchBar.setVisibility(View.INVISIBLE);
                         mMenuTitle.setVisibility(View.VISIBLE);
                         mTitle.setText("찜");
-                        changeFragment(new BottomFragmentPick());
+                        changeFragment(new FragmentPick());
                         break;
                     case R.id.bottom_my_page:
                         mSearchBar.setVisibility(View.INVISIBLE);
                         mMenuTitle.setVisibility(View.VISIBLE);
                         mTitle.setText("마이페이지");
-                        changeFragment(new BottomFragmentMyPage());
+                        changeFragment(new FragmentMyPage());
                         break;
                 }
                 return true;

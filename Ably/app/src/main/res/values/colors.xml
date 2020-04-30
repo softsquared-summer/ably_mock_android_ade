@@ -11,4 +11,6 @@
     <color name="colorRedPink">#FF7182</color>
     <color name="colorBlue">#1E7CFF</color>
     <color name="colorTransparentBlack">#80000000</color>
+    <color name="colorOrange">#FF6D61</color>
+    <color name="colorMurkyOrange">#BA6E68</color>
 </resources>

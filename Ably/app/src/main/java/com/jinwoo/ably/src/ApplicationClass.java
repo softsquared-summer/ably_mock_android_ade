@@ -19,7 +19,7 @@ public class ApplicationClass extends Application {
     public static MediaType MEDIA_TYPE_JPEG = MediaType.parse("image/jpeg");
 
     // Server URL
-    public static String BASE_URL = "3.34.80.36";
+    public static String BASE_URL = "http://3.34.80.36/";
 
     public static SharedPreferences sSharedPreferences = null;
 
@@ -34,9 +34,6 @@ public class ApplicationClass extends Application {
 
     // Retrofit instance
     public static Retrofit retrofit;
-
-    // Category list
-    public static ArrayList<Category> Categories = new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -67,8 +64,10 @@ public class ApplicationClass extends Application {
         return retrofit;
     }
 
+    // Category list
     public static ArrayList<Category> getCategories() {
 
+        ArrayList<Category> Categories = new ArrayList<>();
         Category upper = new Category("상의");
         upper.child.add("전체");
         upper.child.add("티셔츠");
