@@ -35,6 +35,9 @@ public class ApplicationClass extends Application {
     // Retrofit instance
     public static Retrofit retrofit;
 
+    // User name
+    public static String USER_NAME = "";
+
     @Override
     public void onCreate() {
         super.onCreate();

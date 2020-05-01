@@ -25,12 +25,15 @@ import com.jinwoo.ably.src.main.fragments.style.FragmentStyle;
 import com.jinwoo.ably.src.main.fragments.market.FragmentMarket;
 import com.jinwoo.ably.src.main.fragments.pick.FragmentPick;
 import com.jinwoo.ably.src.main.fragments.mypage.FragmentMyPage;
-import com.jinwoo.ably.src.login.LogInActivity;
+import com.jinwoo.ably.src.signin.SignInActivity;
 import com.jinwoo.ably.src.signup.SignUpHomeActivity;
+
+import static com.jinwoo.ably.src.ApplicationClass.USER_NAME;
 
 public class MainActivity extends BaseActivity {
 
     private boolean isLoggedIn;
+    private String mUserName;
     private DrawerLayout mDrawerLayout;
     private View mDrawerView;
     private BottomNavigationView mBottomNavigationView;
@@ -53,6 +56,8 @@ public class MainActivity extends BaseActivity {
         Intent intent = getIntent();
         isLoggedIn = intent.getBooleanExtra("LOG_IN", false);
         if (isLoggedIn) {
+            mUserName = intent.getStringExtra("NAME");
+            USER_NAME = mUserName;
             mLogin.setVisibility(View.INVISIBLE);
             mSignUp.setText("로그아웃");
         }
@@ -96,7 +101,7 @@ public class MainActivity extends BaseActivity {
                 public void onClick(View v) {
                     if (mDrawerLayout.isDrawerOpen(mDrawerView))
                         mDrawerLayout.closeDrawers();
-                    startActivity(new Intent(MainActivity.this, LogInActivity.class));
+                    startActivity(new Intent(MainActivity.this, SignInActivity.class));
                 }
             });
 
@@ -106,6 +111,7 @@ public class MainActivity extends BaseActivity {
                 public void onClick(View v) {
                     if (isLoggedIn) {
                         showCustomToast("로그아웃");
+                        USER_NAME = "";
                         Intent intent = getIntent();
                         intent.putExtra("LOG_IN", false);
                         finish();

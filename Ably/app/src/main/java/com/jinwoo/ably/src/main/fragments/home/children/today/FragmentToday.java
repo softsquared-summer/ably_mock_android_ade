@@ -23,11 +23,13 @@ import com.jinwoo.ably.src.main.fragments.home.children.today.models.BannerRespo
 import com.jinwoo.ably.src.main.fragments.home.children.today.models.RecommendationResponse;
 import java.util.ArrayList;
 
+import static com.jinwoo.ably.src.ApplicationClass.USER_NAME;
+
 public class FragmentToday extends Fragment implements TodayFragmentView {
 
     private ImageView mTopAd;
     private ViewPager2 mBannerSlider;
-    private TextView mPages;
+    private TextView mPages, mRecommendationsForUser;
     private RecyclerView mRecommendations;
     private ProductRecyclerAdapter mProductRecyclerAdapter;
     private BannerSlideAdapter mBannerSlideAdapter;
@@ -70,6 +72,15 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
             }
         });
 
+        // Show user's name if logged in
+        if (!USER_NAME.equals("")) {
+            String text = USER_NAME + "님을 위한 추천";
+            mRecommendationsForUser.setText(text);
+        }
+        else {
+            mRecommendationsForUser.setText("회원님을 위한 추천");
+        }
+
         // Item recommendations mapping
         tryGetRecommendations();
 
@@ -77,10 +88,11 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
     }
 
     private void mapWidgets(View view) {
-        mTopAd = view.findViewById(R.id.today_iv_banner1);
-        mBannerSlider = view.findViewById(R.id.today_banner2);
-        mPages = view.findViewById(R.id.today_tv_banner_pages);
-        mRecommendations = view.findViewById(R.id.today_body);
+        mTopAd =                    view.findViewById(R.id.today_iv_banner1);
+        mBannerSlider =             view.findViewById(R.id.today_banner2);
+        mPages =                    view.findViewById(R.id.today_tv_banner_pages);
+        mRecommendationsForUser =   view.findViewById(R.id.today_tv_recommendations_for_user);
+        mRecommendations =          view.findViewById(R.id.today_body);
     }
 
     private Runnable slideRunnable = new Runnable() {
@@ -148,7 +160,7 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
 
             for (int i = 0; i < recommendations.size(); i++) {
                 int productIdx =        recommendations.get(i).getProductIdx();
-                String thumbnailUrl =   recommendations.get(i).getThumnailUrl();
+                String thumbnailUrl =   recommendations.get(i).getThumbnailUrl();
                 String discountRatio =  recommendations.get(i).getDiscountRatio();
                 String displayedPrice = recommendations.get(i).getDisplayedPrice();
                 int marketIdx =         recommendations.get(i).getMarketIdx();

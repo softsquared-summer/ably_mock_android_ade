@@ -21,16 +21,17 @@ public class DatePickerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_date_picker);
-
-        mDatePicker = findViewById(R.id.date_picker);
-        mCancel = findViewById(R.id.date_picker_tv_cancel);
-        mOk = findViewById(R.id.date_picker_tv_ok);
+        mapWidgets();
 
         yy = Integer.toString(mDatePicker.getYear());
+
         int month = mDatePicker.getMonth() + 1;
         if (month < 10) mm = "0" + month;
         else mm = Integer.toString(month);
-        dd = Integer.toString(mDatePicker.getDayOfMonth());
+
+        int day = mDatePicker.getDayOfMonth();
+        if (day < 10) dd = "0" + day;
+        else dd = Integer.toString(mDatePicker.getDayOfMonth());
 
         mDatePicker.init(mDatePicker.getYear(),
                         mDatePicker.getMonth(),
@@ -66,4 +67,9 @@ public class DatePickerActivity extends BaseActivity {
         });
     }
 
+    private void mapWidgets() {
+        mDatePicker = findViewById(R.id.date_picker);
+        mCancel = findViewById(R.id.date_picker_tv_cancel);
+        mOk = findViewById(R.id.date_picker_tv_ok);
+    }
 }

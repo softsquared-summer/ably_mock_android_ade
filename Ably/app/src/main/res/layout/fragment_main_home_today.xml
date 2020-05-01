@@ -56,6 +56,7 @@
             android:background="@color/colorWhite">
 
             <TextView
+                android:id="@+id/today_tv_recommendations_for_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="회원님을 위한 추천 상품"

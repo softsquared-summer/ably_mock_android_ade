@@ -2,7 +2,6 @@ package com.jinwoo.ably.src.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -163,9 +162,10 @@ public class SignUpWithEmailActivity extends BaseActivity implements SignUpActiv
 
         if (code == 100) {
             String jwt = response.getResult();
-            Log.d("JWT ", jwt);
             sSharedPreferences.edit().putString("jwt", jwt);
-            startActivity(new Intent(SignUpWithEmailActivity.this, SignUpComplete.class));
+
+            Intent intent = new Intent(SignUpWithEmailActivity.this, SignUpComplete.class);
+            startActivity(intent);
             finish();
         }
         else {

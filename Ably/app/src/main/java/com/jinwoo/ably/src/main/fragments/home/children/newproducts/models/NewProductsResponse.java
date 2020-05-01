@@ -1,12 +1,13 @@
-package com.jinwoo.ably.src.main.fragments.home.children.today.models;
+package com.jinwoo.ably.src.main.fragments.home.children.newproducts.models;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class RecommendationResponse {
+public class NewProductsResponse {
 
     public class Result {
+
         @SerializedName("productIdx")
         private int productIdx;
 
@@ -28,14 +29,8 @@ public class RecommendationResponse {
         @SerializedName("productName")
         private String productName;
 
-        @SerializedName("purchaseCnt")
-        private String purchaseCnt;
-
         @SerializedName("isMyHeart")
         private String isMyHeart;
-
-        @SerializedName("isHotDeal")
-        private String isHotDeal;
 
         @SerializedName("isNew")
         private String isNew;
@@ -47,11 +42,13 @@ public class RecommendationResponse {
         public int getMarketIdx() { return marketIdx; }
         public String getMarketName() { return marketName; }
         public String getProductName() { return productName; }
-        public String getPurchaseCnt() { return purchaseCnt; }
         public String getIsMyHeart() { return isMyHeart; }
-        public String getIsHotDeal() { return isHotDeal; }
         public String getIsNew() { return isNew; }
+
     }
+
+    @SerializedName("result")
+    private ArrayList<Result> result;
 
     @SerializedName("isSuccess")
     private boolean isSuccess;
@@ -62,11 +59,8 @@ public class RecommendationResponse {
     @SerializedName("message")
     private String message;
 
-    @SerializedName("result")
-    private ArrayList<Result> result;
-
+    public ArrayList<Result> getResult() { return result; }
     public boolean isSuccess() { return isSuccess; }
     public int getCode() { return code; }
     public String getMessage() { return message; }
-    public ArrayList<Result> getResult() { return result; }
 }

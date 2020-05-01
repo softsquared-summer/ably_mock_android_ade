@@ -1,7 +1,5 @@
 package com.jinwoo.ably.src.main.fragments.home.children.today;
 
-import android.util.Log;
-
 import com.jinwoo.ably.src.main.fragments.home.children.today.interfaces.TodayRetrofitInterface;
 import com.jinwoo.ably.src.main.fragments.home.children.today.interfaces.TodayFragmentView;
 import com.jinwoo.ably.src.main.fragments.home.children.today.models.BannerResponse;

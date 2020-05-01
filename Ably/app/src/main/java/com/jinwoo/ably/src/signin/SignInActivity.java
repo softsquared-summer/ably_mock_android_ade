@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.login;
+package com.jinwoo.ably.src.signin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.BaseActivity;
-import com.jinwoo.ably.src.login.interfaces.LogInActivityView;
-import com.jinwoo.ably.src.login.models.LogInResponse;
+import com.jinwoo.ably.src.signin.interfaces.SignInActivityView;
+import com.jinwoo.ably.src.signin.models.SignInResponse;
 import com.jinwoo.ably.src.main.MainActivity;
 import com.jinwoo.ably.src.signup.SignUpWithEmailActivity;
 import org.json.JSONException;
@@ -19,19 +19,19 @@ import okhttp3.RequestBody;
 import static com.jinwoo.ably.src.ApplicationClass.MEDIA_TYPE_JSON;
 import static com.jinwoo.ably.src.ApplicationClass.sSharedPreferences;
 
-public class LogInActivity extends BaseActivity implements LogInActivityView {
+public class SignInActivity extends BaseActivity implements SignInActivityView {
 
     private ImageView mBack;
     private EditText mEmail, mPassword;
     private Button mLogIn, mSignUp;
-    private LogInService mLogInService;
+    private SignInService mSignInService;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mapWidgets();
-        mLogInService = new LogInService(this);
+        mSignInService = new SignInService(this);
 
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,14 +56,14 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
                 }
                 RequestBody requestBody = RequestBody.create(MEDIA_TYPE_JSON, jsonObject.toString());
 
-                tryLogIn(requestBody);
+                trySignIn(requestBody);
             }
         });
 
         mSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LogInActivity.this, SignUpWithEmailActivity.class));
+                startActivity(new Intent(SignInActivity.this, SignUpWithEmailActivity.class));
                 finish();
             }
         });
@@ -77,13 +77,13 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
         mSignUp =       findViewById(R.id.login_btn_signin);
     }
 
-    private void tryLogIn(RequestBody requestBody) {
+    private void trySignIn(RequestBody requestBody) {
         showProgressDialog();
-        mLogInService.getLogIn(requestBody);
+        mSignInService.getSignIn(requestBody);
     }
 
     @Override
-    public void validateSuccess(LogInResponse response) {
+    public void validateSuccess(SignInResponse response) {
         hideProgressDialog();
         int code = response.getCode();
         String message = response.getMessage();
@@ -91,12 +91,15 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
         if (code == 100) {
             showCustomToast(message);
 
-            String jwt = response.getResult();
+            SignInResponse.Result result = response.getResult();
+            String userName = result.getUserName();
+            String jwt = result.getJwt();
             sSharedPreferences.edit().putString("jwt", jwt);
 
-            Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra("LOG_IN", true);
-            //intent.putExtra("NAME", );
+            intent.putExtra("NAME", userName);
             startActivity(intent);
             finish();
         }

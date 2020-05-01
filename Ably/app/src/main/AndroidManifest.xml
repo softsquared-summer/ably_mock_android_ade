@@ -46,7 +46,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
 
-        <activity android:name=".src.login.LogInActivity"
+        <activity android:name=".src.signin.SignInActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 

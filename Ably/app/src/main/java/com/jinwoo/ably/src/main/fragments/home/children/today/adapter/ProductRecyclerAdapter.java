@@ -2,6 +2,7 @@ package com.jinwoo.ably.src.main.fragments.home.children.today.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,26 +42,27 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
         // Pull image from url
         Glide.with(context).load(product.getThumbnailUrl()).into(holder.photo);
+        Log.d("URL", ""+product.getThumbnailUrl());
 
         holder.discount.setText(product.getDiscountRatio().equals("0%") ? null : product.getDiscountRatio() + " ");
         holder.price.setText(product.getDisplayedPrice());
         holder.market.setText(product.getMarketName());
         holder.name.setText(product.getProductName());
 
-//        if (product.getIsHotDeal().equals("Y")) {
-//            holder.tag.setImageResource(R.drawable.img_hotdeal);
-//            String purchaseCnt = "             " + product.getPurchaseCnt();
-//            holder.sales.setText(purchaseCnt);
-//        }
-//        else if (product.getIsNew().equals("Y")) {
-//            holder.tag.setImageResource(R.drawable.img_new);
-//            String purchaseCnt = "             " + product.getPurchaseCnt();
-//            holder.sales.setText(purchaseCnt);
-//        }
-//        else {
-//            holder.tag.setVisibility(View.INVISIBLE);
-//            holder.sales.setText(product.getPurchaseCnt());
-//        }
+        if (product.getIsHotDeal().equals("Y")) {
+            holder.tag.setImageResource(R.drawable.img_hotdeal);
+            String purchaseCnt = "             " + product.getPurchaseCnt();
+            holder.sales.setText(purchaseCnt);
+        }
+        else if (product.getIsNew().equals("Y")) {
+            holder.tag.setImageResource(R.drawable.img_new);
+            String purchaseCnt = "             " + product.getPurchaseCnt();
+            holder.sales.setText(purchaseCnt);
+        }
+        else {
+            holder.tag.setVisibility(View.INVISIBLE);
+            holder.sales.setText(product.getPurchaseCnt());
+        }
 
         holder.heart.setOnClickListener(new View.OnClickListener() {
             @Override
