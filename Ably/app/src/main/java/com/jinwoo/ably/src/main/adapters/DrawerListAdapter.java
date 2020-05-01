@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.main.adapter;
+package com.jinwoo.ably.src.main.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

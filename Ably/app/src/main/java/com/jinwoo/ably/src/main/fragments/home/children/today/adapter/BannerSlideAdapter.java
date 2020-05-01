@@ -1,21 +1,23 @@
-package com.jinwoo.ably.src.main.adapter;
+package com.jinwoo.ably.src.main.fragments.home.children.today.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.bumptech.glide.Glide;
 import com.jinwoo.ably.R;
-import com.jinwoo.ably.src.main.data.SlideImage;
 import java.util.ArrayList;
 
 public class BannerSlideAdapter extends RecyclerView.Adapter<BannerSlideAdapter.SliderViewHolder> {
 
-    private ArrayList<SlideImage> itemList;
+    private Context context;
+    private ArrayList<String> itemList;
 
-    public BannerSlideAdapter(ArrayList<SlideImage> itemList) {
+    public BannerSlideAdapter(Context context, ArrayList<String> itemList) {
+        this.context = context;
         this.itemList = itemList;
     }
 
@@ -44,9 +46,8 @@ public class BannerSlideAdapter extends RecyclerView.Adapter<BannerSlideAdapter.
             image = (ImageView) itemView.findViewById(R.id.slider_iv_image);
         }
 
-        private void setImage(SlideImage slideImage){
-            // TODO: Bring url information from the slideBanner item and load the corresponding image from the network
-            image.setImageResource(slideImage.getImage());
+        private void setImage(String url){
+            Glide.with(context).load(url).into(image);
         }
 
     }

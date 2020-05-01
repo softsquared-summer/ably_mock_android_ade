@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.jinwoo.ably.R;
-import com.jinwoo.ably.src.main.adapter.PagerAdapter;
+import com.jinwoo.ably.src.main.adapters.PagerAdapter;
 
 public class FragmentHome extends Fragment {
 

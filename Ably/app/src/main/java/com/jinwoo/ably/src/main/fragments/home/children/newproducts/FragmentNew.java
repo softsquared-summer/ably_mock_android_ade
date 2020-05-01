@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import com.jinwoo.ably.R;
-import com.jinwoo.ably.src.main.adapter.ProductRecyclerAdapter;
-import com.jinwoo.ably.src.main.adapter.ProductSlideAdapter;
-import com.jinwoo.ably.src.main.data.Product;
+import com.jinwoo.ably.src.main.fragments.home.children.newproducts.adapters.ProductRecyclerAdapter;
+import com.jinwoo.ably.src.main.fragments.home.children.newproducts.adapters.ProductSlideAdapter;
+import com.jinwoo.ably.src.main.fragments.home.children.newproducts.data.Product;
 import java.util.ArrayList;
 
 public class FragmentNew extends Fragment {
@@ -50,29 +50,13 @@ public class FragmentNew extends Fragment {
 
         //TODO: Networking required
         //Inserting product data into productList
-        productList1 = new ArrayList<>();
         ArrayList<Integer> photos = new ArrayList<>();
         photos.add(R.drawable.img_product_1);
         photos.add(R.drawable.img_product_2);
         photos.add(R.drawable.img_product_3);
         photos.add(R.drawable.img_product_4);
-        productList1.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
-        productList1.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
-        productList1.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "", "1,464개 구매중"));
-        productList1.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
-        productList1.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
-        productList1.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "", "1,464개 구매중"));
-        productList1.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
-        productList1.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
+        productList1 = new ArrayList<>();
         productList2 = new ArrayList<>();
-        productList2.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
-        productList2.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
-        productList2.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "", "1,464개 구매중"));
-        productList2.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
-        productList2.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
-        productList2.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "", "1,464개 구매중"));
-        productList2.add(new Product(R.raw.gif_product_1, photos, 10, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "NEW" ,"1,464개 구매중"));
-        productList2.add(new Product(R.raw.gif_product_1, photos, 0, 22800, "이너니티", "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트", "HOT_DEAL", "1,464개 구매중"));
 
         // First product list setting
         productSlideAdapter = new ProductSlideAdapter(productList1, context);

@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.main.data;
+package com.jinwoo.ably.src.main.fragments.home.children.newproducts.data;
 
 public class Product {
 

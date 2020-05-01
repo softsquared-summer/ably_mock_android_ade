@@ -8,14 +8,13 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 import static com.jinwoo.ably.src.ApplicationClass.getRetrofit;
 
 class SignUpService {
-    private final SignUpActivityView mSignUpActivityView;
+    private final SignUpActivityView signUpActivityView;
 
     SignUpService(final SignUpActivityView signupActivityView) {
-        this.mSignUpActivityView = signupActivityView;
+        this.signUpActivityView = signupActivityView;
     }
 
     void postSignUp(RequestBody requestBody) {
@@ -26,17 +25,16 @@ class SignUpService {
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                 final SignUpResponse signupResponse = response.body();
                 if (signupResponse == null) {
-                    mSignUpActivityView.signUpFailure(null);
+                    signUpActivityView.signUpFailure(null);
                     return;
                 }
 
-                mSignUpActivityView.signUpSuccess(signupResponse);
+                signUpActivityView.signUpSuccess(signupResponse);
             }
 
             @Override
             public void onFailure(Call<SignUpResponse> call, Throwable t) {
-                mSignUpActivityView.signUpFailure(null);
-                Log.d("THROWABLE", t.toString());
+                signUpActivityView.signUpFailure(null);
             }
         });
     }

@@ -19,16 +19,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.ApplicationClass;
 import com.jinwoo.ably.src.BaseActivity;
-import com.jinwoo.ably.src.main.adapter.DrawerListAdapter;
+import com.jinwoo.ably.src.main.adapters.DrawerListAdapter;
 import com.jinwoo.ably.src.main.fragments.home.FragmentHome;
 import com.jinwoo.ably.src.main.fragments.style.FragmentStyle;
 import com.jinwoo.ably.src.main.fragments.market.FragmentMarket;
 import com.jinwoo.ably.src.main.fragments.pick.FragmentPick;
 import com.jinwoo.ably.src.main.fragments.mypage.FragmentMyPage;
-import com.jinwoo.ably.src.login.LoginActivity;
+import com.jinwoo.ably.src.login.LogInActivity;
 import com.jinwoo.ably.src.signup.SignUpHomeActivity;
 
 public class MainActivity extends BaseActivity {
+
+    private boolean isLoggedIn;
     private DrawerLayout mDrawerLayout;
     private View mDrawerView;
     private BottomNavigationView mBottomNavigationView;
@@ -36,7 +38,7 @@ public class MainActivity extends BaseActivity {
     private EditText mSearchBar;
     private LinearLayout mMenuTitle;
     private TextView mSeeMoreBenefits, mTitle;
-    private Button mLogin, mSignIn, mPoint, mCoupon, mDelivery, mSupport;
+    private Button mLogin, mSignUp, mPoint, mCoupon, mDelivery, mSupport;
     private FragmentTransaction mFragmentTransaction;
     private ExpandableListView mDrawerListView;
     private DrawerListAdapter mDrawerListAdapter;
@@ -46,6 +48,18 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mapWidgets();
+
+        // Log in state check
+        Intent intent = getIntent();
+        isLoggedIn = intent.getBooleanExtra("LOG_IN", false);
+        if (isLoggedIn) {
+            mLogin.setVisibility(View.INVISIBLE);
+            mSignUp.setText("로그아웃");
+        }
+        else {
+            mLogin.setVisibility(View.VISIBLE);
+            mSignUp.setText("5초 회원가입");
+        }
 
         // Initializing drawer listview
         mDrawerListAdapter = new DrawerListAdapter(getApplicationContext(), R.layout.item_category_parent, R.layout.item_category_child, ApplicationClass.getCategories());
@@ -80,14 +94,27 @@ public class MainActivity extends BaseActivity {
             mLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    if (mDrawerLayout.isDrawerOpen(mDrawerView))
+                        mDrawerLayout.closeDrawers();
+                    startActivity(new Intent(MainActivity.this, LogInActivity.class));
                 }
             });
 
-            mSignIn.setOnClickListener(new View.OnClickListener() {
+            // Sign up or log out
+            mSignUp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, SignUpHomeActivity.class));
+                    if (isLoggedIn) {
+                        showCustomToast("로그아웃");
+                        Intent intent = getIntent();
+                        intent.putExtra("LOG_IN", false);
+                        finish();
+                        startActivity(intent);
+                    }
+                    else {
+                        if (mDrawerLayout.isDrawerOpen(mDrawerView)) mDrawerLayout.closeDrawers();
+                        startActivity(new Intent(MainActivity.this, SignUpHomeActivity.class));
+                    }
                 }
             });
 
@@ -168,21 +195,21 @@ public class MainActivity extends BaseActivity {
     }
 
     private void mapWidgets() {
-        mDrawerLayout = findViewById(R.id.main_drawer_layout);
-        mDrawerView = findViewById(R.id.drawer_drawer);
+        mDrawerLayout =         findViewById(R.id.main_drawer_layout);
+        mDrawerView =           findViewById(R.id.drawer_drawer);
         mBottomNavigationView = findViewById(R.id.main_bottom_navigation);
-        mDrawerMenuButton = findViewById(R.id.main_iv_menu);
-        mSearchBar = findViewById(R.id.main_et_search_bar);
-        mMenuTitle = findViewById(R.id.main_top_detail);
-        mTitle = findViewById(R.id.main_top_detail_title);
-        mSeeMoreBenefits = findViewById(R.id.drawer_tv_see_more_benefits);
-        mLogin = findViewById(R.id.drawer_login);
-        mSignIn = findViewById(R.id.drawer_signin);
-        mPoint = findViewById(R.id.drawer_point);
-        mCoupon = findViewById(R.id.drawer_coupon);
-        mDelivery = findViewById(R.id.drawer_delivery);
-        mSupport = findViewById(R.id.drawer_support);
-        mDrawerListView = findViewById(R.id.drawer_listview);
+        mDrawerMenuButton =     findViewById(R.id.main_iv_menu);
+        mSearchBar =            findViewById(R.id.main_et_search_bar);
+        mMenuTitle =            findViewById(R.id.main_top_detail);
+        mTitle =                findViewById(R.id.main_top_detail_title);
+        mSeeMoreBenefits =      findViewById(R.id.drawer_tv_see_more_benefits);
+        mLogin =                findViewById(R.id.drawer_login);
+        mSignUp =               findViewById(R.id.drawer_signin);
+        mPoint =                findViewById(R.id.drawer_point);
+        mCoupon =               findViewById(R.id.drawer_coupon);
+        mDelivery =             findViewById(R.id.drawer_delivery);
+        mSupport =              findViewById(R.id.drawer_support);
+        mDrawerListView =       findViewById(R.id.drawer_listview);
     }
 
     private void changeFragment(Fragment fragment) {
