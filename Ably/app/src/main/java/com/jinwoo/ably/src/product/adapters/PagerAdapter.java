@@ -4,10 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import com.jinwoo.ably.src.product.fragments.InfoFragment;
-import com.jinwoo.ably.src.product.fragments.RelatedFragment;
-import com.jinwoo.ably.src.product.fragments.ReviewFragment;
-import com.jinwoo.ably.src.product.fragments.SupportFragment;
+import com.jinwoo.ably.src.product.fragments.info.InfoFragment;
+import com.jinwoo.ably.src.product.fragments.related.RelatedFragment;
+import com.jinwoo.ably.src.product.fragments.review.ReviewFragment;
+import com.jinwoo.ably.src.product.fragments.support.SupportFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
 

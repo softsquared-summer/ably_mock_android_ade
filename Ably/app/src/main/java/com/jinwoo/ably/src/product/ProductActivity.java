@@ -12,12 +12,11 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.BaseActivity;
-import com.jinwoo.ably.src.main.data.SlideImage;
 import com.jinwoo.ably.src.product.adapters.ImageSlideAdapter;
 import com.jinwoo.ably.src.product.adapters.PagerAdapter;
+import com.jinwoo.ably.src.product.fragments.options.OptionsFragment;
 import com.jinwoo.ably.src.product.views.WrapContentViewPager;
 import com.jinwoo.ably.src.purchase.PurchaseActivity;
-
 import java.util.ArrayList;
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -31,9 +30,8 @@ public class ProductActivity extends BaseActivity {
     private WrapContentViewPager mViewPager;
     private ImageView mLike;
     private Button mPurchase;
-
     private String mProductUrl, mProductName, mProductDiscount, mProductPrice, mProductOriginalPrice;
-    private ArrayList<SlideImage> mProductImages;
+    private ArrayList<Integer> mProductImages;
     private ImageSlideAdapter mImageSliderAdapter;
     private PagerAdapter mPagerAdapter;
 
@@ -121,7 +119,9 @@ public class ProductActivity extends BaseActivity {
         mPurchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ProductActivity.this, PurchaseActivity.class));
+                OptionsFragment options = new OptionsFragment();
+                options.show(getSupportFragmentManager(), "options");
+                //startActivity(new Intent(ProductActivity.this, PurchaseActivity.class));
             }
         });
     }
@@ -144,10 +144,10 @@ public class ProductActivity extends BaseActivity {
     private void parseJSON(String url) {
         // Temporary settings
         mProductImages = new ArrayList<>();
-        mProductImages.add(new SlideImage(R.drawable.img_product_1));
-        mProductImages.add(new SlideImage(R.drawable.img_product_2));
-        mProductImages.add(new SlideImage(R.drawable.img_product_3));
-        mProductImages.add(new SlideImage(R.drawable.img_product_4));
+        mProductImages.add(R.drawable.img_product_1);
+        mProductImages.add(R.drawable.img_product_2);
+        mProductImages.add(R.drawable.img_product_3);
+        mProductImages.add(R.drawable.img_product_4);
         mProductName = "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트";
         mProductDiscount = "";
         mProductPrice = "22,800원";

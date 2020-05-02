@@ -24,6 +24,7 @@ import com.jinwoo.ably.src.main.fragments.home.children.today.models.Recommendat
 import java.util.ArrayList;
 
 import static com.jinwoo.ably.src.ApplicationClass.USER_NAME;
+import static com.jinwoo.ably.src.ApplicationClass.sSharedPreferences;
 
 public class FragmentToday extends Fragment implements TodayFragmentView {
 
@@ -73,8 +74,9 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
         });
 
         // Show user's name if logged in
-        if (!USER_NAME.equals("")) {
-            String text = USER_NAME + "님을 위한 추천";
+        String userName = sSharedPreferences.getString(USER_NAME, null);
+        if (userName != null) {
+            String text = userName + "님을 위한 추천";
             mRecommendationsForUser.setText(text);
         }
         else {

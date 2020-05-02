@@ -1,13 +1,17 @@
 package com.jinwoo.ably.src.signin;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import com.jinwoo.ably.R;
+import com.jinwoo.ably.src.ApplicationClass;
 import com.jinwoo.ably.src.BaseActivity;
 import com.jinwoo.ably.src.signin.interfaces.SignInActivityView;
 import com.jinwoo.ably.src.signin.models.SignInResponse;
@@ -17,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import okhttp3.RequestBody;
 import static com.jinwoo.ably.src.ApplicationClass.MEDIA_TYPE_JSON;
+import static com.jinwoo.ably.src.ApplicationClass.USER_NAME;
+import static com.jinwoo.ably.src.ApplicationClass.X_ACCESS_TOKEN;
 import static com.jinwoo.ably.src.ApplicationClass.sSharedPreferences;
 
 public class SignInActivity extends BaseActivity implements SignInActivityView {
@@ -92,9 +98,13 @@ public class SignInActivity extends BaseActivity implements SignInActivityView {
             showCustomToast(message);
 
             SignInResponse.Result result = response.getResult();
-            String userName = result.getUserName();
-            String jwt = result.getJwt();
-            sSharedPreferences.edit().putString("jwt", jwt);
+            String userName =   result.getUserName();
+            String jwt =        result.getJwt();
+
+            SharedPreferences.Editor editor = sSharedPreferences.edit();
+            editor.putString(X_ACCESS_TOKEN, jwt);
+            editor.putString(USER_NAME, userName);
+            editor.commit();
 
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.product.fragments;
+package com.jinwoo.ably.src.product.fragments.review;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

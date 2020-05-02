@@ -7,15 +7,14 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.jinwoo.ably.R;
-import com.jinwoo.ably.src.main.data.SlideImage;
 import java.util.ArrayList;
 
 public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideAdapter.SliderViewHolder> {
 
-    private ArrayList<SlideImage> itemList;
+    private ArrayList<Integer> images;
 
-    public ImageSlideAdapter(ArrayList<SlideImage> itemList) {
-        this.itemList = itemList;
+    public ImageSlideAdapter(ArrayList<Integer> images) {
+        this.images = images;
     }
 
     @NonNull
@@ -26,12 +25,12 @@ public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideAdapter.Sl
 
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
-        holder.setImage(itemList.get(position));
+        holder.setImage(images.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+        return images.size();
     }
 
     class SliderViewHolder extends RecyclerView.ViewHolder {
@@ -40,13 +39,12 @@ public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideAdapter.Sl
 
         SliderViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.slider_iv_image);
+            image = itemView.findViewById(R.id.slider_iv_image);
         }
 
-        private void setImage(SlideImage slideImage){
+        private void setImage(int image){
             // TODO: Bring url information from the slideBanner item and load the corresponding image from the network
-            image.setImageResource(slideImage.getImage());
+            this.image.setImageResource(image);
         }
-
     }
 }

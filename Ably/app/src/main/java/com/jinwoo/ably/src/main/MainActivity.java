@@ -1,6 +1,7 @@
 package com.jinwoo.ably.src.main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -29,11 +30,12 @@ import com.jinwoo.ably.src.signin.SignInActivity;
 import com.jinwoo.ably.src.signup.SignUpHomeActivity;
 
 import static com.jinwoo.ably.src.ApplicationClass.USER_NAME;
+import static com.jinwoo.ably.src.ApplicationClass.X_ACCESS_TOKEN;
+import static com.jinwoo.ably.src.ApplicationClass.sSharedPreferences;
 
 public class MainActivity extends BaseActivity {
 
     private boolean isLoggedIn;
-    private String mUserName;
     private DrawerLayout mDrawerLayout;
     private View mDrawerView;
     private BottomNavigationView mBottomNavigationView;
@@ -56,8 +58,6 @@ public class MainActivity extends BaseActivity {
         Intent intent = getIntent();
         isLoggedIn = intent.getBooleanExtra("LOG_IN", false);
         if (isLoggedIn) {
-            mUserName = intent.getStringExtra("NAME");
-            USER_NAME = mUserName;
             mLogin.setVisibility(View.INVISIBLE);
             mSignUp.setText("로그아웃");
         }
@@ -111,7 +111,12 @@ public class MainActivity extends BaseActivity {
                 public void onClick(View v) {
                     if (isLoggedIn) {
                         showCustomToast("로그아웃");
-                        USER_NAME = "";
+
+                        SharedPreferences.Editor editor = sSharedPreferences.edit();
+                        editor.putString(X_ACCESS_TOKEN, null);
+                        editor.putString(USER_NAME, null);
+                        editor.commit();
+
                         Intent intent = getIntent();
                         intent.putExtra("LOG_IN", false);
                         finish();

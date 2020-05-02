@@ -1,6 +1,7 @@
 package com.jinwoo.ably.src.signup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import okhttp3.RequestBody;
 import static com.jinwoo.ably.src.ApplicationClass.MEDIA_TYPE_JSON;
+import static com.jinwoo.ably.src.ApplicationClass.USER_NAME;
+import static com.jinwoo.ably.src.ApplicationClass.X_ACCESS_TOKEN;
 import static com.jinwoo.ably.src.ApplicationClass.sSharedPreferences;
 
 public class SignUpWithEmailActivity extends BaseActivity implements SignUpActivityView {
@@ -162,7 +165,10 @@ public class SignUpWithEmailActivity extends BaseActivity implements SignUpActiv
 
         if (code == 100) {
             String jwt = response.getResult();
-            sSharedPreferences.edit().putString("jwt", jwt);
+            SharedPreferences.Editor editor = sSharedPreferences.edit();
+            editor.putString(X_ACCESS_TOKEN, jwt);
+            editor.putString(USER_NAME, userName);
+            editor.commit();
 
             Intent intent = new Intent(SignUpWithEmailActivity.this, SignUpComplete.class);
             startActivity(intent);
