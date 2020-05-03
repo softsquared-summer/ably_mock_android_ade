@@ -1,45 +1,56 @@
 package com.jinwoo.ably.src.product;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.BaseActivity;
 import com.jinwoo.ably.src.product.adapters.ImageSlideAdapter;
 import com.jinwoo.ably.src.product.adapters.PagerAdapter;
 import com.jinwoo.ably.src.product.fragments.options.OptionsFragment;
+import com.jinwoo.ably.src.product.interfaces.ProductView;
+import com.jinwoo.ably.src.product.models.ProductResponse;
 import com.jinwoo.ably.src.product.views.WrapContentViewPager;
-import com.jinwoo.ably.src.purchase.PurchaseActivity;
 import java.util.ArrayList;
 import me.relex.circleindicator.CircleIndicator3;
 
-public class ProductActivity extends BaseActivity {
+public class ProductActivity extends BaseActivity implements ProductView {
 
-    private ImageView mBack;
-    private ViewPager2 mImages;
-    private CircleIndicator3 mCircleIndicator;
-    private TextView mName, mDiscount, mPrice, mOriginalPrice, mLikes;
-    private TabLayout mTabLayout;
-    private WrapContentViewPager mViewPager;
-    private ImageView mLike;
-    private Button mPurchase;
-    private String mProductUrl, mProductName, mProductDiscount, mProductPrice, mProductOriginalPrice;
-    private ArrayList<Integer> mProductImages;
-    private ImageSlideAdapter mImageSliderAdapter;
+    private ImageView               mBack;
+    private ViewPager2              mImages;
+    private CircleIndicator3        mCircleIndicator;
+    private TextView                mName, mDiscount, mPrice, mOriginalPrice, mLikes, mCode,
+                                    mMarket, mMarketTags;
+    private TabLayout               mTabLayout;
+    private WrapContentViewPager    mViewPager;
+    private ImageView               mMarketThumbnail, mLike;
+    private Button                  mPurchase;
+
+    private int                     mMarketIdx, mProductIdx;
+    private String                  mProductName, mDiscountRatio, mDisplayedPrice, mProductPrice,
+                                    mProductCode, mContents, mIsMyHeart, mMarketName, mMarketHashTags,
+                                    mMarketThumbnailUrl;
+    private ArrayList<String>       mMainImgUrlList, mImgUrlList;
+    private ImageSlideAdapter       mImageSliderAdapter;
     private PagerAdapter mPagerAdapter;
+    private ProductService          mProductService;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         mapWidgets();
+        mProductService = new ProductService(this);
 
         mBack.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -50,44 +61,11 @@ public class ProductActivity extends BaseActivity {
 
         //TODO: get product url from the intent and parse, map it onto the UI of this activity
         Intent intent = getIntent();
-        mProductUrl = intent.getStringExtra("URL");
-        parseJSON(mProductUrl);
-
-        // Product image setting
-        mCircleIndicator.setViewPager(mImages);
-        mCircleIndicator.createIndicators(mProductImages.size(), 0);
-        mImageSliderAdapter = new ImageSlideAdapter(mProductImages);
-        mImages.setAdapter(mImageSliderAdapter);
-        mImages.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                if (positionOffsetPixels == 0) {
-                    mImages.setCurrentItem(position);
-                    mCircleIndicator.animatePageSelected(position);
-                }
-            }
-        });
-
-        // Product name
-        mName.setText(mProductName);
-
-        // Product discount info
-        if (mProductDiscount.equals("")) mDiscount.setVisibility(View.INVISIBLE);
-        else mDiscount.setText(mProductDiscount);
-
-        // Product price
-        String displayPrice;
-        if (mProductDiscount.equals("")) displayPrice = mProductPrice;
-        else displayPrice = "         " + mProductPrice;
-        mPrice.setText(displayPrice);
-
-        // Product price before discount
-        if (mProductOriginalPrice.equals("")) mOriginalPrice.setVisibility(View.INVISIBLE);
-        else mOriginalPrice.setText(mProductOriginalPrice);
+        mProductIdx = intent.getIntExtra("PRODUCT_INDEX", 0);
+        tryGetProduct(mProductIdx);
 
         // Tabs
-        mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, 4);
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, 4);
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -134,23 +112,94 @@ public class ProductActivity extends BaseActivity {
         mDiscount           = findViewById(R.id.product_tv_discount);
         mPrice              = findViewById(R.id.product_tv_price);
         mOriginalPrice      = findViewById(R.id.product_tv_original_price);
+        mMarket             = findViewById(R.id.product_tv_market_name);
+        mMarketTags         = findViewById(R.id.product_tv_market_hash_tags);
         mTabLayout          = findViewById(R.id.product_tab);
         mViewPager          = findViewById(R.id.product_fragment_container);
+        mCode               = findViewById(R.id.product_tv_product_code);
+        mMarketThumbnail    = findViewById(R.id.product_iv_market_thumbnail);
         mLike               = findViewById(R.id.product_iv_heart);
         mLikes              = findViewById(R.id.product_tv_likes);
         mPurchase           = findViewById(R.id.product_btn_purchase);
     }
 
-    private void parseJSON(String url) {
-        // Temporary settings
-        mProductImages = new ArrayList<>();
-        mProductImages.add(R.drawable.img_product_1);
-        mProductImages.add(R.drawable.img_product_2);
-        mProductImages.add(R.drawable.img_product_3);
-        mProductImages.add(R.drawable.img_product_4);
-        mProductName = "주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트";
-        mProductDiscount = "";
-        mProductPrice = "22,800원";
-        mProductOriginalPrice = "";
+    private void tryGetProduct(int productIdx) {
+        showProgressDialog();
+        mProductService.getProduct(productIdx);
+    }
+
+    @Override
+    public void validateSuccess(ProductResponse response) {
+        hideProgressDialog();
+
+        int code = response.getCode();
+        if (code == 100) {
+            ProductResponse.Result result = response.getResult();
+
+            mProductName        = result.getProductName();
+            mDiscountRatio      = result.getDiscountRatio();
+            mDisplayedPrice     = result.getDisplayedPrice();
+            mProductPrice       = result.getPrice();
+            mProductCode        = result.getProductCode();
+            mContents           = result.getContents();
+            mIsMyHeart          = result.getIsMyHeart();
+            mMarketIdx          = result.getMarketIdx();
+            mMarketName         = result.getMarketName();
+            mMarketHashTags     = result.getMarketHashTags();
+            mMarketThumbnailUrl = result.getMarketThumbnailUrl();
+            mMainImgUrlList     = result.getMainImgUrlList();
+            mImgUrlList         = result.getImgUrlList();
+
+            // Product image setting
+            mCircleIndicator.setViewPager(mImages);
+            mCircleIndicator.createIndicators(mMainImgUrlList.size(), 0);
+            mImageSliderAdapter = new ImageSlideAdapter(getApplicationContext(), mMainImgUrlList);
+            mImages.setAdapter(mImageSliderAdapter);
+            mImages.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                    if (positionOffsetPixels == 0) {
+                        mImages.setCurrentItem(position);
+                        mCircleIndicator.animatePageSelected(position);
+                    }
+                }
+            });
+
+            // Product name
+            mName.setText(mProductName);
+
+            // Product price info
+            if (mDiscountRatio.equals("0%")) {
+                mDiscount.setVisibility(View.INVISIBLE);
+                mOriginalPrice.setVisibility(View.INVISIBLE);
+                mPrice.setText(mProductPrice);
+            }
+            else {
+                mDiscount.setText(mDiscountRatio);
+                String displayedPrice = "         " + mDisplayedPrice;
+                mOriginalPrice.setText(mProductPrice);
+                mOriginalPrice.setPaintFlags(mOriginalPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                mPrice.setText(displayedPrice);
+            }
+
+            // Product code
+            String productCode  = "상품코드 " + mProductCode;
+            mCode.setText(productCode);
+
+            // Market info
+            Glide.with(getApplicationContext()).load(mMarketThumbnailUrl).into(mMarketThumbnail);
+            mMarket.setText(mMarketName);
+            mMarketTags.setText(mMarketHashTags);;
+        }
+        else {
+            showCustomToast("상품코드: " + mProductIdx + ", " + response.getMessage());
+        }
+    }
+
+    @Override
+    public void validateFailure(String message) {
+        hideProgressDialog();
+        showCustomToast(message == null ? String.valueOf(R.string.network_error) : message);
     }
 }

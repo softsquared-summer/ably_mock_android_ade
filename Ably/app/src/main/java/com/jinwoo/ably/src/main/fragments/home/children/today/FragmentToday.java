@@ -22,7 +22,6 @@ import com.jinwoo.ably.src.main.fragments.home.children.today.interfaces.TodayFr
 import com.jinwoo.ably.src.main.fragments.home.children.today.models.BannerResponse;
 import com.jinwoo.ably.src.main.fragments.home.children.today.models.RecommendationResponse;
 import java.util.ArrayList;
-
 import static com.jinwoo.ably.src.ApplicationClass.USER_NAME;
 import static com.jinwoo.ably.src.ApplicationClass.sSharedPreferences;
 

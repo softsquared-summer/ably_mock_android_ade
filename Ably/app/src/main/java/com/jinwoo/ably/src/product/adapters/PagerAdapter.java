@@ -9,7 +9,7 @@ import com.jinwoo.ably.src.product.fragments.related.RelatedFragment;
 import com.jinwoo.ably.src.product.fragments.review.ReviewFragment;
 import com.jinwoo.ably.src.product.fragments.support.SupportFragment;
 
-public class PagerAdapter extends FragmentPagerAdapter {
+public class PagerAdapter extends androidx.fragment.app.FragmentPagerAdapter {
 
     private int numOfTabs;
 

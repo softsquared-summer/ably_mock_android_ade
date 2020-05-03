@@ -42,7 +42,6 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
         // Pull image from url
         Glide.with(context).load(product.getThumbnailUrl()).into(holder.photo);
-        Log.d("URL", ""+product.getThumbnailUrl());
 
         holder.discount.setText(product.getDiscountRatio().equals("0%") ? null : product.getDiscountRatio() + " ");
         holder.price.setText(product.getDisplayedPrice());
@@ -83,17 +82,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ProductActivity.class);
-                intent.putExtra("PRODUCT_INDEX",    product.getProductIdx());
-                intent.putExtra("THUMBNAIL_URL",    product.getThumbnailUrl());
-                intent.putExtra("DISCOUNT_RATIO",   product.getDiscountRatio());
-                intent.putExtra("DISPLAYED_PRICE",  product.getDisplayedPrice());
-                intent.putExtra("MARKET_INDEX",     product.getMarketIdx());
-                intent.putExtra("MARKET_NAME",      product.getMarketName());
-                intent.putExtra("PRODUCT_NAME",     product.getProductName());
-                intent.putExtra("PURCHASE_COUNT",   product.getPurchaseCnt());
-                intent.putExtra("IS_MY_HEART",      product.getIsMyHeart());
-                intent.putExtra("IS_HOT_DEAL",      product.getIsHotDeal());
-                intent.putExtra("IS_NEW",           product.getIsNew());
+                intent.putExtra("PRODUCT_INDEX", product.getProductIdx());
                 context.startActivity(intent);
             }
         });
