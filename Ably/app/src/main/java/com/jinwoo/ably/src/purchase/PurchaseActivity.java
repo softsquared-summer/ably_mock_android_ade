@@ -1,5 +1,6 @@
 package com.jinwoo.ably.src.purchase;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,12 +15,18 @@ public class PurchaseActivity extends BaseActivity {
     private ImageView mBack;
     private Button mPay;
     private ExpandableRelativeLayout mExpandableProducts;
+    private String mFirstOption, mSecondOption;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchase);
         mapWidgets();
+
+        Intent intent = getIntent();
+        mFirstOption = intent.getStringExtra("FIRST_OPTION");
+        mSecondOption = intent.getStringExtra("SECOND_OPTION");
+        showCustomToast(mFirstOption + ", " + mSecondOption);
 
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override

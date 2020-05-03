@@ -2,6 +2,7 @@ package com.jinwoo.ably.src.product.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,10 +13,7 @@ public class WrapContentViewPager extends ViewPager {
     public WrapContentViewPager(@NonNull Context context) {
         super(context);
     }
-
-    public WrapContentViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
+    public WrapContentViewPager(@NonNull Context context, @Nullable AttributeSet attrs) { super(context, attrs); }
 
     private void initPageChangeListener() {
         addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {

@@ -10,21 +10,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.BaseActivity;
+import com.jinwoo.ably.src.main.fragments.home.children.newproducts.data.Product;
 import com.jinwoo.ably.src.product.adapters.ImageSlideAdapter;
 import com.jinwoo.ably.src.product.adapters.PagerAdapter;
 import com.jinwoo.ably.src.product.fragments.options.OptionsFragment;
 import com.jinwoo.ably.src.product.interfaces.ProductView;
 import com.jinwoo.ably.src.product.models.ProductResponse;
 import com.jinwoo.ably.src.product.views.WrapContentViewPager;
+import com.jinwoo.ably.src.purchase.PurchaseActivity;
+
 import java.util.ArrayList;
 import me.relex.circleindicator.CircleIndicator3;
 
-public class ProductActivity extends BaseActivity implements ProductView {
+public class ProductActivity extends BaseActivity implements ProductView, OptionsFragment.OptionsListener {
 
     private ImageView               mBack;
     private ViewPager2              mImages;
@@ -40,9 +42,9 @@ public class ProductActivity extends BaseActivity implements ProductView {
     private String                  mProductName, mDiscountRatio, mDisplayedPrice, mProductPrice,
                                     mProductCode, mContents, mIsMyHeart, mMarketName, mMarketHashTags,
                                     mMarketThumbnailUrl;
-    private ArrayList<String>       mMainImgUrlList, mImgUrlList;
+    private ArrayList<String>       mMainImgUrlList, mNormalImgUrlList;
     private ImageSlideAdapter       mImageSliderAdapter;
-    private PagerAdapter mPagerAdapter;
+    private PagerAdapter            mPagerAdapter;
     private ProductService          mProductService;
 
     @Override
@@ -59,37 +61,22 @@ public class ProductActivity extends BaseActivity implements ProductView {
             }
         });
 
-        //TODO: get product url from the intent and parse, map it onto the UI of this activity
         Intent intent = getIntent();
         mProductIdx = intent.getIntExtra("PRODUCT_INDEX", 0);
         tryGetProduct(mProductIdx);
-
-        // Tabs
-        mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, 4);
-        mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                mViewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
 
         // Likes
         mLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (mIsMyHeart.equals("N")) {
+                    mLike.setImageResource(R.drawable.icon_full_heart_pink);
+                    mIsMyHeart = "Y";
+                }
+                else {
+                    mLike.setImageResource(R.drawable.icon_hollow_heart_pink);
+                    mIsMyHeart = "N";
+                }
             }
         });
 
@@ -97,9 +84,8 @@ public class ProductActivity extends BaseActivity implements ProductView {
         mPurchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OptionsFragment options = new OptionsFragment();
+                OptionsFragment options = new OptionsFragment(mProductIdx);
                 options.show(getSupportFragmentManager(), "options");
-                //startActivity(new Intent(ProductActivity.this, PurchaseActivity.class));
             }
         });
     }
@@ -148,7 +134,7 @@ public class ProductActivity extends BaseActivity implements ProductView {
             mMarketHashTags     = result.getMarketHashTags();
             mMarketThumbnailUrl = result.getMarketThumbnailUrl();
             mMainImgUrlList     = result.getMainImgUrlList();
-            mImgUrlList         = result.getImgUrlList();
+            mNormalImgUrlList   = result.getNormalImgUrlList();
 
             // Product image setting
             mCircleIndicator.setViewPager(mImages);
@@ -184,16 +170,36 @@ public class ProductActivity extends BaseActivity implements ProductView {
             }
 
             // Product code
-            String productCode  = "상품코드 " + mProductCode;
+            String productCode = "상품코드 " + mProductCode;
             mCode.setText(productCode);
 
             // Market info
             Glide.with(getApplicationContext()).load(mMarketThumbnailUrl).into(mMarketThumbnail);
             mMarket.setText(mMarketName);
             mMarketTags.setText(mMarketHashTags);;
+
+            // Heart
+            if (mIsMyHeart.equals("Y"))
+                mLike.setImageResource(R.drawable.icon_full_heart_pink);
+            else
+                mLike.setImageResource(R.drawable.icon_hollow_heart_pink);
+
+            // Tabs
+            mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, 4, mNormalImgUrlList);
+            mViewPager.setAdapter(mPagerAdapter);
+            mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+            mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) { mViewPager.setCurrentItem(tab.getPosition()); }
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {}
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {}
+            });
         }
         else {
-            showCustomToast("상품코드: " + mProductIdx + ", " + response.getMessage());
+            showCustomToast(response.getMessage());
+            finish();
         }
     }
 
@@ -201,5 +207,13 @@ public class ProductActivity extends BaseActivity implements ProductView {
     public void validateFailure(String message) {
         hideProgressDialog();
         showCustomToast(message == null ? String.valueOf(R.string.network_error) : message);
+    }
+
+    @Override
+    public void onPurchaseClicked(String selectedFirstOption, String selectedSecondOption) {
+        Intent intent = new Intent(ProductActivity.this, PurchaseActivity.class);
+        intent.putExtra("FIRST_OPTION", selectedFirstOption);
+        intent.putExtra("SECOND_OPTION", selectedSecondOption);
+        startActivity(intent);
     }
 }

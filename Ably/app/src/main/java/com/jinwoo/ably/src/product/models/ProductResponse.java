@@ -45,8 +45,8 @@ public class ProductResponse {
         @SerializedName("mainImgUrlList")
         private ArrayList<String> mainImgUrlList;
 
-        @SerializedName("imgUrlList")
-        private ArrayList<String> imgUrlList;
+        @SerializedName("normalImgUrlList")
+        private ArrayList<String> normalImgUrlList;
 
         public int getProductIdx() { return productIdx; }
         public String getProductName() { return productName; }
@@ -61,7 +61,7 @@ public class ProductResponse {
         public String getMarketHashTags() { return marketHashTags; }
         public String getMarketThumbnailUrl() { return marketThumbnailUrl; }
         public ArrayList<String> getMainImgUrlList() { return mainImgUrlList; }
-        public ArrayList<String> getImgUrlList() { return imgUrlList; }
+        public ArrayList<String> getNormalImgUrlList() { return normalImgUrlList; }
     }
 
     @SerializedName("isSuccess")
