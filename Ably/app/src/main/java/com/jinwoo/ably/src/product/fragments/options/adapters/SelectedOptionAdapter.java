@@ -16,12 +16,27 @@ public class SelectedOptionAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<SelectedOption> items;
+    private View summaryView;
+    private TextView totalCountView, totalCostView;
+    private Button cartButton, purchaseButton;
     private LayoutInflater inflater;
     private NumberFormat format;
 
-    public SelectedOptionAdapter(Context context, ArrayList<SelectedOption> items) {
-        this.context = context;
-        this.items = items;
+    public SelectedOptionAdapter(Context context,
+                                 ArrayList<SelectedOption> items,
+                                 View summaryView,
+                                 TextView totalCountView,
+                                 TextView totalCostView,
+                                 Button cartButton,
+                                 Button purchaseButton) {
+        this.context        = context;
+        this.items          = items;
+        this.summaryView    = summaryView;
+        this.totalCountView = totalCountView;
+        this.totalCostView  = totalCostView;
+        this.cartButton     = cartButton;
+        this.purchaseButton = purchaseButton;
+
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         format = NumberFormat.getInstance();
     }
@@ -57,7 +72,7 @@ public class SelectedOptionAdapter extends BaseAdapter {
         option1 .setText(item.getOption1());
         option2 .setText(item.getOption2());
         count   .setText(String.valueOf(item.getCount()));
-        String displayedPrice = format.format(item.getCount() * item.getCost());
+        String displayedPrice = format.format(item.getCount() * item.getCost()) + "원";
         cost    .setText(displayedPrice);
 
         minus.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +83,8 @@ public class SelectedOptionAdapter extends BaseAdapter {
                     count   .setText(String.valueOf(item.getCount()));
                     String displayedPrice = format.format(item.getCount() * item.getCost()) + "원";
                     cost    .setText(displayedPrice);
+                    setSummary();
+                    setButtons();
                 }
             }
         });
@@ -79,6 +96,8 @@ public class SelectedOptionAdapter extends BaseAdapter {
                 count   .setText(String.valueOf(item.getCount()));
                 String displayedPrice = format.format(item.getCount() * item.getCost()) + "원";
                 cost    .setText(displayedPrice);
+                setSummary();
+                setButtons();
             }
         });
 
@@ -86,10 +105,54 @@ public class SelectedOptionAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 items.remove(item);
+                if (items.isEmpty())
+                    summaryView.setVisibility(View.INVISIBLE);
+                setSummary();
+                setButtons();
                 notifyDataSetChanged();
             }
         });
 
+        setSummary();
+        setButtons();
         return view;
+    }
+
+    public int getTotalCount() {
+        int count = 0;
+        for (int i = 0; i < items.size(); i++) {
+            count += items.get(i).getCount();
+        }
+        return count;
+    }
+
+    public int getTotalCost() {
+        int sum = 0;
+        for (int i = 0; i < items.size(); i++) {
+            sum += items.get(i).getCost() * items.get(i).getCount();
+        }
+        return sum;
+    }
+
+    private void setSummary() {
+        totalCountView.setText(String.valueOf(getTotalCount()));
+        NumberFormat format = NumberFormat.getInstance();
+        String displayedTotalCost = format.format(getTotalCost()) + "원";
+        totalCostView.setText(displayedTotalCost);
+    }
+
+    private void setButtons() {
+        if (items.isEmpty()) {
+            cartButton      .setBackgroundResource(R.drawable.button_light_grey);
+            purchaseButton  .setBackgroundResource(R.drawable.button_light_grey);
+            cartButton      .setEnabled(false);
+            purchaseButton  .setEnabled(false);
+        }
+        else {
+            cartButton      .setBackgroundResource(R.drawable.button_black);
+            purchaseButton  .setBackgroundResource(R.drawable.button_black);
+            cartButton      .setEnabled(true);
+            purchaseButton  .setEnabled(true);
+        }
     }
 }

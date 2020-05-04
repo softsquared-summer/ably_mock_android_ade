@@ -54,5 +54,6 @@ dependencies {
     // RoundedImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
     // Expandable Layout
-    implementation 'com.github.aakira:expandable-layout:1.4.2@aar'
+    implementation 'com.github.aakira:expandable-layout:1.6.0@aar'
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 }

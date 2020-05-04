@@ -133,23 +133,25 @@
         android:weightSum="2">
 
         <Button
-            android:id="@+id/options_cart"
+            android:id="@+id/options_btn_cart"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/button_light_grey"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:text="장바구니"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp"/>
 
         <Button
-            android:id="@+id/options_purchase"
+            android:id="@+id/options_btn_purchase"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/button_light_grey"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:text="구매하기"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp"/>
 
     </LinearLayout>

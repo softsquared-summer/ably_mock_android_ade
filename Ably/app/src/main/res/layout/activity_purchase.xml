@@ -2,7 +2,6 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -38,7 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        android:layout_marginBottom="85dp">
+        android:layout_marginBottom="75dp"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,107 +92,20 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            <net.cachapa.expandablelayout.ExpandableLayout
                 android:id="@+id/purchase_expandable_products"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:ael_expanded="false"
-                app:ael_orientation="vertical"
-                app:ael_interpolator="accelerate"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="8dp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:el_expanded="false"
+                android:layout_marginVertical="8dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ListView
+                    android:id="@+id/purchase_lv_cart_items"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"/>
 
-                    <TextView
-                        android:id="@+id/purchase_tv_number_of_products_to_ship"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="에이블리 배송상품 1개"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/purchase_iv_product_image"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/img_product_1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/purchase_tv_product_market"
-                        app:riv_corner_radius="10dp" />
-
-                    <TextView
-                        android:id="@+id/purchase_tv_product_market"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:text="이너니티"
-                        android:textColor="@color/colorLightGrey"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toEndOf="@+id/purchase_iv_product_image"
-                        app:layout_constraintTop_toBottomOf="@+id/purchase_tv_number_of_products_to_ship" />
-
-                    <TextView
-                        android:id="@+id/purchase_tv_product_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:maxLines="1"
-                        android:text="주문폭주/당일출고:-) 데일리 밑단컷팅 청스커트"
-                        android:textColor="@color/colorGrey"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toEndOf="@+id/purchase_iv_product_image"
-                        app:layout_constraintTop_toBottomOf="@+id/purchase_tv_product_market" />
-
-                    <TextView
-                        android:id="@+id/purchase_tv_product_options"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="그레이/FREE"
-                        android:textColor="@color/colorLightGrey"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toEndOf="@+id/purchase_iv_product_image"
-                        app:layout_constraintTop_toBottomOf="@+id/purchase_tv_product_name" />
-
-                    <TextView
-                        android:id="@+id/purchase_tv_product_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="18,800원"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/purchase_iv_product_image"
-                        app:layout_constraintTop_toBottomOf="@+id/purchase_tv_product_options" />
-
-                    <TextView
-                        android:id="@+id/purchase_tv_product_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="수량 1개"
-                        android:textColor="@color/colorLightGrey"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/purchase_tv_product_price"
-                        app:layout_constraintTop_toBottomOf="@+id/purchase_tv_product_options" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+            </net.cachapa.expandablelayout.ExpandableLayout>
 
             <View
                 android:layout_width="match_parent"

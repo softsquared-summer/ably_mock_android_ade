@@ -3,7 +3,6 @@ package com.jinwoo.ably.src.product.fragments.options;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -22,6 +21,8 @@ import com.jinwoo.ably.src.product.fragments.options.adapters.SelectedOptionAdap
 import com.jinwoo.ably.src.product.fragments.options.data.SelectedOption;
 import com.jinwoo.ably.src.product.fragments.options.interfaces.OptionsView;
 import com.jinwoo.ably.src.product.fragments.options.models.OptionsResponse;
+
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class OptionsFragment extends BottomSheetDialogFragment implements OptionsView{
@@ -31,8 +32,8 @@ public class OptionsFragment extends BottomSheetDialogFragment implements Option
     private Spinner                     mSpinner1, mSpinner2;
     private ListView                    mSelectedOptions;
     private LinearLayout                mSummary;
-    private TextView                    mCount, mTotalPrice;
-    private Button                      mPurchase;
+    private TextView                    mTotalCount, mTotalCost;
+    private Button                      mCart, mPurchase;
     private int                         mProductIdx, mDetailedProductIdx, mDetailedPrice, mStock;
     private String                      mFirstOption, mSecondOption, mSelectedFirstOption, mSelectedSecondOption;
     private ArrayList<String>           mFirstOptions, mSecondOptions;
@@ -53,7 +54,7 @@ public class OptionsFragment extends BottomSheetDialogFragment implements Option
         // Selected options listview setting
         mSelectedOptions.setDividerHeight(16);
         mSelectedOptionList     = new ArrayList<>();
-        mSelectedOptionAdapter  = new SelectedOptionAdapter(getContext(), mSelectedOptionList);
+        mSelectedOptionAdapter  = new SelectedOptionAdapter(getContext(), mSelectedOptionList, mSummary, mTotalCount, mTotalCost, mCart,mPurchase);
         mSelectedOptions.setAdapter(mSelectedOptionAdapter);
 
         mPurchase.setOnClickListener(new View.OnClickListener() {
@@ -72,13 +73,14 @@ public class OptionsFragment extends BottomSheetDialogFragment implements Option
     }
 
     private void mapWidgets(View view) {
-        mPurchase           = view.findViewById(R.id.options_purchase);
         mSpinner1           = view.findViewById(R.id.options_spinner1);
         mSpinner2           = view.findViewById(R.id.options_spinner2);
         mSelectedOptions    = view.findViewById(R.id.options_lv_selected_options);
         mSummary            = view.findViewById(R.id.options_summary);
-        mCount              = view.findViewById(R.id.options_tv_count);
-        mTotalPrice         = view.findViewById(R.id.options_tv_cost);
+        mTotalCount         = view.findViewById(R.id.options_tv_count);
+        mTotalCost          = view.findViewById(R.id.options_tv_cost);
+        mCart               = view.findViewById(R.id.options_btn_cart);
+        mPurchase           = view.findViewById(R.id.options_btn_purchase);
 
         mSpinner2           .setVisibility(View.INVISIBLE);
         mSelectedOptions    .setVisibility(View.INVISIBLE);
@@ -127,18 +129,16 @@ public class OptionsFragment extends BottomSheetDialogFragment implements Option
                     if (position != 0) {
                         mSpinner2.setVisibility(View.VISIBLE);
                         mSelectedOptions.setVisibility(View.INVISIBLE);
-                    }
-                    else {
-                        mSpinner2.setVisibility(View.INVISIBLE);
-                        mSelectedOptions.setVisibility(View.VISIBLE);
-                        mSummary.setVisibility(View.INVISIBLE);
+                        if (mSelectedOptionList.isEmpty()) mSummary.setVisibility(View.INVISIBLE);
+                        else mSummary.setVisibility(View.VISIBLE);
                     }
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
                     mSpinner2.setVisibility(View.INVISIBLE);
                     mSelectedOptions.setVisibility(View.VISIBLE);
-                    mSummary.setVisibility(View.INVISIBLE);
+                    if (mSelectedOptionList.isEmpty()) mSummary.setVisibility(View.INVISIBLE);
+                    else mSummary.setVisibility(View.VISIBLE);
                 }
             });
 
@@ -165,6 +165,7 @@ public class OptionsFragment extends BottomSheetDialogFragment implements Option
                                 mSpinner2       .setVisibility(View.INVISIBLE);
                                 mSelectedOptions.setVisibility(View.VISIBLE);
                                 mSummary        .setVisibility(View.VISIBLE);
+                                setSummary();
 
                                 mSpinner1.setSelection(0);
                                 mSpinner2.setSelection(0);
@@ -178,16 +179,20 @@ public class OptionsFragment extends BottomSheetDialogFragment implements Option
                         mSpinner2       .setVisibility(View.INVISIBLE);
                         mSelectedOptions.setVisibility(View.VISIBLE);
                         mSummary        .setVisibility(View.VISIBLE);
+                        setSummary();
 
                         mSpinner1.setSelection(0);
                         mSpinner2.setSelection(0);
+                        mSpinner1.setSelected(false);
+                        mSpinner2.setSelected(false);
                     }
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
                     mSpinner2       .setVisibility(View.VISIBLE);
                     mSelectedOptions.setVisibility(View.INVISIBLE);
-                    mSummary        .setVisibility(View.INVISIBLE);
+                    if (mSelectedOptionList.isEmpty()) mSummary.setVisibility(View.INVISIBLE);
+                    else mSummary.setVisibility(View.VISIBLE);
                 }
             });
 
@@ -196,6 +201,13 @@ public class OptionsFragment extends BottomSheetDialogFragment implements Option
             Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_SHORT).show();
             dismiss();
         }
+    }
+
+    void setSummary() {
+        mTotalCount.setText(String.valueOf(mSelectedOptionAdapter.getTotalCount()));
+        NumberFormat format = NumberFormat.getInstance();
+        String displayedTotalCost = format.format(mSelectedOptionAdapter.getTotalCost()) + "원";
+        mTotalCost.setText(displayedTotalCost);
     }
 
     @Override

@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/colorLightGrey"
-        android:descendantFocusability="blocksDescendants">
+        android:background="@color/colorLightGrey">
 
         <ImageView
             android:id="@+id/today_iv_banner1"

@@ -21,7 +21,6 @@ import com.jinwoo.ably.src.product.interfaces.ProductView;
 import com.jinwoo.ably.src.product.models.ProductResponse;
 import com.jinwoo.ably.src.product.views.WrapContentViewPager;
 import com.jinwoo.ably.src.purchase.PurchaseActivity;
-
 import java.util.ArrayList;
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -37,7 +36,7 @@ public class ProductActivity extends BaseActivity implements ProductView, Option
     private ImageView               mMarketThumbnail, mLike;
     private Button                  mPurchase;
 
-    private int                     mMarketIdx, mProductIdx;
+    private int                     mMarketIdx, mProductIdx, mPurchaseCnt;
     private String                  mProductName, mDiscountRatio, mDisplayedPrice, mProductPrice,
                                     mProductCode, mContents, mIsMyHeart, mMarketName, mMarketHashTags,
                                     mMarketThumbnailUrl;
@@ -126,6 +125,7 @@ public class ProductActivity extends BaseActivity implements ProductView, Option
             mDisplayedPrice     = result.getDisplayedPrice();
             mProductPrice       = result.getPrice();
             mProductCode        = result.getProductCode();
+            mPurchaseCnt        = result.getPurchaseCnt();
             mContents           = result.getContents();
             mIsMyHeart          = result.getIsMyHeart();
             mMarketIdx          = result.getMarketIdx();
@@ -210,8 +210,34 @@ public class ProductActivity extends BaseActivity implements ProductView, Option
 
     @Override
     public void onPurchaseClicked(ArrayList<SelectedOption> selectedOptionList) {
+        // Load option information into an intent and carry it over to PurchaseActivity
         Intent intent = new Intent(ProductActivity.this, PurchaseActivity.class);
-        //TODO: put ArrayList<SelectedOption> inside the intent
+        ArrayList<String> option1List = new ArrayList<>();
+        ArrayList<String> option2List = new ArrayList<>();
+        ArrayList<Integer> countList = new ArrayList<>();
+        ArrayList<Integer> costList = new ArrayList<>();
+
+        for (int i = 0; i < selectedOptionList.size(); i++) {
+            String option1  = selectedOptionList.get(i).getOption1();
+            String option2  = selectedOptionList.get(i).getOption2();
+            int count       = selectedOptionList.get(i).getCount();
+            int cost        = selectedOptionList.get(i).getCost();
+
+            option1List.add(option1);
+            option2List.add(option2);
+            countList.add(count);
+            costList.add(cost);
+        }
+
+        intent.putExtra("PRODUCT_INDEX", mProductIdx);
+        intent.putExtra("PRODUCT_NAME", mProductName);
+        intent.putExtra("MARKET_NAME", mMarketName);
+        intent.putExtra("PRODUCT_THUMBNAIL", mMainImgUrlList.get(0));
+        intent.putStringArrayListExtra("OPTION_1", option1List);
+        intent.putStringArrayListExtra("OPTION_2", option2List);
+        intent.putIntegerArrayListExtra("COUNT", countList);
+        intent.putIntegerArrayListExtra("COST", costList);
+
         startActivity(intent);
     }
 }

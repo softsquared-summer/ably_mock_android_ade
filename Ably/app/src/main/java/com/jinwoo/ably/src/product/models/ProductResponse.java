@@ -24,6 +24,9 @@ public class ProductResponse {
         @SerializedName("productCode")
         private String productCode;
 
+        @SerializedName("purchaseCnt")
+        private int purchaseCnt;
+
         @SerializedName("isMyHeart")
         private String isMyHeart;
 
@@ -54,6 +57,7 @@ public class ProductResponse {
         public String getDisplayedPrice() { return displayedPrice; }
         public String getPrice() { return price; }
         public String getProductCode() { return productCode; }
+        public int getPurchaseCnt() { return purchaseCnt; }
         public String getIsMyHeart() { return isMyHeart; }
         public String getContents() { return contents; }
         public int getMarketIdx() { return marketIdx; }
