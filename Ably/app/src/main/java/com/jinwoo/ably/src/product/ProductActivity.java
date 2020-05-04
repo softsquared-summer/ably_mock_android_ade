@@ -3,7 +3,6 @@ package com.jinwoo.ably.src.product;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,10 +13,10 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.BaseActivity;
-import com.jinwoo.ably.src.main.fragments.home.children.newproducts.data.Product;
 import com.jinwoo.ably.src.product.adapters.ImageSlideAdapter;
 import com.jinwoo.ably.src.product.adapters.PagerAdapter;
 import com.jinwoo.ably.src.product.fragments.options.OptionsFragment;
+import com.jinwoo.ably.src.product.fragments.options.data.SelectedOption;
 import com.jinwoo.ably.src.product.interfaces.ProductView;
 import com.jinwoo.ably.src.product.models.ProductResponse;
 import com.jinwoo.ably.src.product.views.WrapContentViewPager;
@@ -210,10 +209,9 @@ public class ProductActivity extends BaseActivity implements ProductView, Option
     }
 
     @Override
-    public void onPurchaseClicked(String selectedFirstOption, String selectedSecondOption) {
+    public void onPurchaseClicked(ArrayList<SelectedOption> selectedOptionList) {
         Intent intent = new Intent(ProductActivity.this, PurchaseActivity.class);
-        intent.putExtra("FIRST_OPTION", selectedFirstOption);
-        intent.putExtra("SECOND_OPTION", selectedSecondOption);
+        //TODO: put ArrayList<SelectedOption> inside the intent
         startActivity(intent);
     }
 }

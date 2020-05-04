@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@drawable/spinner">
+
+    <TextView
+        android:id="@+id/selected_option_tv_option1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Option_1"
+        android:textColor="@color/colorBlack"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/selected_option_tv_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="|"
+        android:textColor="@color/colorGrey"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/selected_option_tv_option1"
+        app:layout_constraintStart_toEndOf="@+id/selected_option_tv_option1"
+        app:layout_constraintTop_toTopOf="@+id/selected_option_tv_option1" />
+
+    <TextView
+        android:id="@+id/selected_option_tv_option2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Option_2"
+        android:textColor="@color/colorBlack"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/selected_option_tv_option1"
+        app:layout_constraintStart_toEndOf="@+id/selected_option_tv_divider"
+        app:layout_constraintTop_toTopOf="@+id/selected_option_tv_option1" />
+
+    <Button
+        android:id="@+id/selected_option_btn_minus"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_minus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selected_option_tv_option1" />
+
+    <TextView
+        android:id="@+id/selected_option_tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="N"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/selected_option_btn_minus"
+        app:layout_constraintStart_toEndOf="@+id/selected_option_btn_minus"
+        app:layout_constraintTop_toTopOf="@+id/selected_option_btn_minus" />
+
+    <Button
+        android:id="@+id/selected_option_btn_plus"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/button_plus"
+        app:layout_constraintBottom_toBottomOf="@+id/selected_option_btn_minus"
+        app:layout_constraintStart_toEndOf="@+id/selected_option_tv_count"
+        app:layout_constraintTop_toTopOf="@+id/selected_option_btn_minus" />
+
+    <Button
+        android:id="@+id/selected_option_btn_exit"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_exit"
+        app:layout_constraintBottom_toTopOf="@+id/selected_option_tv_cost"
+        app:layout_constraintEnd_toEndOf="@+id/selected_option_tv_cost" />
+
+    <TextView
+        android:id="@+id/selected_option_tv_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="32,000원"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/selected_option_btn_plus"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,9 +24,6 @@ public class PurchaseActivity extends BaseActivity {
         mapWidgets();
 
         Intent intent = getIntent();
-        mFirstOption = intent.getStringExtra("FIRST_OPTION");
-        mSecondOption = intent.getStringExtra("SECOND_OPTION");
-        showCustomToast(mFirstOption + ", " + mSecondOption);
 
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override

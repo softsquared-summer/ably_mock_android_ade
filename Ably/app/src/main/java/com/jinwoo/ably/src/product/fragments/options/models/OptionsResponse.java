@@ -10,14 +10,14 @@ public class OptionsResponse {
         @SerializedName("detailedProductIdx")
         private int detailedProductIdx;
 
-        @SerializedName("fistOption")
+        @SerializedName("firstOption")
         private String firstOption;
 
         @SerializedName("secondOption")
         private String secondOption;
 
         @SerializedName("detailedPrice")
-        private String detailedPrice;
+        private int detailedPrice;
 
         @SerializedName("stock")
         private int stock;
@@ -25,7 +25,7 @@ public class OptionsResponse {
         public int getDetailedProductIdx() { return detailedProductIdx; }
         public String getFirstOption() { return firstOption; }
         public String getSecondOption() { return secondOption; }
-        public String getDetailedPrice() { return detailedPrice; }
+        public int getDetailedPrice() { return detailedPrice; }
         public int getStock() { return stock; }
     }
 

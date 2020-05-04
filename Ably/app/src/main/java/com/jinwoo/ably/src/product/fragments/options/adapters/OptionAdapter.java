@@ -9,17 +9,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.jinwoo.ably.R;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class OptionAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<String> options;
+    private ArrayList<Integer> prices;
     private LayoutInflater inflater;
 
-    public OptionAdapter(@NonNull Context context, ArrayList<String> options) {
+    public OptionAdapter(@NonNull Context context, ArrayList<String> options, ArrayList<Integer> prices) {
         this.context = context;
         this.options = options;
+        this.prices = prices;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -63,6 +66,17 @@ public class OptionAdapter extends BaseAdapter {
 
         TextView itemName = convertView.findViewById(R.id.item_spinner_dropdown_tv_item);
         itemName.setText(option);
+
+        TextView itemPrice = convertView.findViewById(R.id.item_spinner_dropdown_tv_price);
+        if (position == 0 || prices == null) {
+            itemPrice.setVisibility(View.INVISIBLE);
+        }
+        else {
+            itemPrice.setVisibility(View.VISIBLE);
+            NumberFormat format = NumberFormat.getInstance();
+            String displayedPrice = format.format(prices.get(position - 1)) + "원";
+            itemPrice.setText(displayedPrice);
+        }
 
         return  convertView;
     }
