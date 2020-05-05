@@ -132,6 +132,10 @@ public class OptionsFragment extends BottomSheetDialogFragment implements Option
                         if (mSelectedOptionList.isEmpty()) mSummary.setVisibility(View.INVISIBLE);
                         else mSummary.setVisibility(View.VISIBLE);
                     }
+                    else {
+                        mSpinner2.setVisibility(View.INVISIBLE);
+                        mSpinner2.setSelection(0);
+                    }
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {

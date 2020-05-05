@@ -34,15 +34,16 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize"
-        android:layout_marginBottom="75dp"
+        android:layout_marginBottom="85dp"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <View
@@ -51,61 +52,11 @@
                 android:background="@color/colorLighterGrey"
                 android:layout_marginVertical="2dp"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ExpandableListView
+                android:id="@+id/purchase_lv_cart_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="24dp"
-                android:onClick="expandProducts">
-
-                <TextView
-                    android:id="@+id/purchase_tv_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="주문상품 총 0개"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/purchase_tv_free_shipping"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="전체 무료배송"
-                    android:textColor="@color/colorBlue"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/purchase_tv_number" />
-
-                <ImageView
-                    android:id="@+id/purchase_iv_arrow_1"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/icon_down"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <net.cachapa.expandablelayout.ExpandableLayout
-                android:id="@+id/purchase_expandable_products"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:el_expanded="false"
-                android:layout_marginVertical="8dp">
-
-                <ListView
-                    android:id="@+id/purchase_lv_cart_items"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            </net.cachapa.expandablelayout.ExpandableLayout>
+                android:layoutDirection="rtl"/>
 
             <View
                 android:layout_width="match_parent"
@@ -114,7 +65,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="24dp">
 
@@ -122,6 +73,7 @@
                     android:id="@+id/purchase_tv_address_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="배송지 정보"
                     android:textColor="@color/colorBlack"
                     android:textSize="18sp"
@@ -133,6 +85,7 @@
                     android:id="@+id/purchase_tv_type_in_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="배송지를 입력해주세요"
                     android:textColor="@color/colorBlue"
@@ -160,7 +113,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="24dp">
 
@@ -168,6 +121,7 @@
                     android:id="@+id/purchase_tv_refund_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="환불 계좌"
                     android:textColor="@color/colorBlack"
                     android:textSize="18sp"
@@ -176,9 +130,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/purchase_tv_type_in_account"
+                    android:id="@+id/purchase_tv_account_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="환불받을 계좌를 입력해주세요."
                     android:textColor="@color/colorLightGrey"
@@ -206,7 +161,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="34dp">
 
@@ -214,10 +169,12 @@
                     android:id="@+id/purchase_tv_cost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="결제금액"
                     android:textColor="@color/colorBlack"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -230,9 +187,9 @@
                     android:textColor="@color/colorOrange"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/purchase_tv_cost"
                     app:layout_constraintStart_toEndOf="@+id/purchase_tv_cost"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/purchase_tv_cost" />
 
                 <ImageView
                     android:id="@+id/purchase_iv_arrow_2"
@@ -251,35 +208,11 @@
                 android:layout_height="1dp"
                 android:background="@color/colorLighterGrey"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ExpandableListView
+                android:id="@+id/purchase_lv_payments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="34dp">
-
-                <TextView
-                    android:id="@+id/purchase_tv_payment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="결제방법"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <ImageView
-                    android:id="@+id/purchase_iv_arrow_3"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/icon_down"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layoutDirection="rtl" />
 
         </LinearLayout>
 
