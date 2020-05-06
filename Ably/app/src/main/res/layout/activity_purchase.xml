@@ -88,7 +88,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="배송지를 입력해주세요"
-                    android:textColor="@color/colorBlue"
+                    android:textColor="@color/colorGrey"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/purchase_tv_address_info" />
@@ -190,16 +190,6 @@
                     app:layout_constraintBottom_toBottomOf="@+id/purchase_tv_cost"
                     app:layout_constraintStart_toEndOf="@+id/purchase_tv_cost"
                     app:layout_constraintTop_toTopOf="@+id/purchase_tv_cost" />
-
-                <ImageView
-                    android:id="@+id/purchase_iv_arrow_2"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/icon_down"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

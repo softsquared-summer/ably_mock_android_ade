@@ -12,11 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.BaseActivity;
+import com.jinwoo.ably.src.chooseaddress.ChooseAddressActivity;
 import com.jinwoo.ably.src.purchase.adapters.CartItemListAdapter;
 import com.jinwoo.ably.src.purchase.adapters.PaymentListAdapter;
 import com.jinwoo.ably.src.purchase.data.Cart;
 import com.jinwoo.ably.src.purchase.data.CartItem;
-import com.jinwoo.ably.src.purchase.refundaccount.RefundAccountActivity;
+import com.jinwoo.ably.src.refundaccount.RefundAccountActivity;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class PurchaseActivity extends BaseActivity {
     private Button mPay;
     private ScrollView mScrollView;
     private ExpandableListView mCartItemListView, mPaymentListView;
-    private TextView mTotalCost, mChangeAccount, mAccountInfo;
+    private TextView mTotalCost, mEnterAddress, mChangeAccount, mAccountInfo;
     private CartItemListAdapter mCartItemListAdapter;
     private PaymentListAdapter mPaymentListAdapter;
     private ArrayList<CartItem> mCartItems;
@@ -98,6 +99,13 @@ public class PurchaseActivity extends BaseActivity {
             }
         });
 
+        mEnterAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(PurchaseActivity.this, ChooseAddressActivity.class), 2);
+            }
+        });
+
         mTotalCost.setText(getTotalCost());
 
         mPaymentListAdapter = new PaymentListAdapter(getApplicationContext(), R.layout.item_payment_parent, R.layout.item_payment_child);
@@ -157,6 +165,7 @@ public class PurchaseActivity extends BaseActivity {
         mPay                = findViewById(R.id.purchase_btn_pay);
         mCartItemListView   = findViewById(R.id.purchase_lv_cart_items);
         mScrollView         = findViewById(R.id.scrollView);
+        mEnterAddress       = findViewById(R.id.purchase_tv_enter_address);
         mChangeAccount      = findViewById(R.id.purchase_tv_change_account);
         mAccountInfo        = findViewById(R.id.purchase_tv_account_info);
         mTotalCost          = findViewById(R.id.purchase_tv_total_cost);
@@ -188,6 +197,9 @@ public class PurchaseActivity extends BaseActivity {
                 String accountInfo = mRefundAccountHolder + "  |  " + mBank + " " + mRefundAccount;
                 mAccountInfo.setText(accountInfo);
                 mAccountInfo.setTextColor(getResources().getColor(R.color.colorBlack));
+                break;
+            case 2:
+
                 break;
         }
     }

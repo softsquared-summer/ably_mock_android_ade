@@ -26,6 +26,7 @@ public class PaymentListAdapter extends BaseExpandableListAdapter {
         this.groupLayout = groupLayout;
         this.childLayout = childLayout;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        payment = "";
     }
 
     @Override

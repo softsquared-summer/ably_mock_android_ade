@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.purchase.refundaccount;
+package com.jinwoo.ably.src.refundaccount;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import com.jinwoo.ably.R;
@@ -20,6 +21,7 @@ public class RefundAccountActivity extends BaseActivity {
     View mBanks;
     EditText mHolder, mAccount;
     TextView mSelectedBank;
+    ImageView mBack;
     Button mOk;
     String mBank, mStringHolder, mStringAccount;
 
@@ -28,6 +30,13 @@ public class RefundAccountActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refund_account);
         mapWidgets();
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         final int[] selectedItem = {0};
         mBanks.setOnClickListener(new View.OnClickListener() {
@@ -146,6 +155,7 @@ public class RefundAccountActivity extends BaseActivity {
     }
 
     private void mapWidgets() {
+        mBack           = findViewById(R.id.choose_address_iv_back);
         mBanks          = findViewById(R.id.refund_account_banks);
         mSelectedBank   = findViewById(R.id.refund_account_tv_bank);
         mHolder         = findViewById(R.id.refund_account_et_holder);
