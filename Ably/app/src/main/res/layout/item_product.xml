@@ -12,6 +12,7 @@
         android:id="@+id/item_product_iv_image"
         android:layout_width="170dp"
         android:layout_height="170dp"
+        android:scaleType="fitXY"
         android:src="@drawable/img_product_1"
         app:riv_corner_radius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
