@@ -24,6 +24,7 @@ public class SignUpComplete extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SignUpComplete.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("LOG_IN", true);
                 startActivity(intent);
                 finish();
             }

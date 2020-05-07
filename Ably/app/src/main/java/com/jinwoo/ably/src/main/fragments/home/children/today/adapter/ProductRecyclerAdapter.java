@@ -2,7 +2,6 @@ package com.jinwoo.ably.src.main.fragments.home.children.today.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,16 +20,18 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
     private ArrayList<Product> productList;
     private Context context;
+    private LayoutInflater inflater;
 
     public ProductRecyclerAdapter(ArrayList<Product> productList, Context context) {
         this.productList = productList;
         this.context = context;
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
+        View view = inflater.inflate(R.layout.item_product, parent, false);
         CustomViewHolder holder;
         holder = new CustomViewHolder(view);
         return holder;
@@ -40,27 +41,41 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     public void onBindViewHolder(@NonNull final CustomViewHolder holder, int position) {
         final Product product = productList.get(position);
 
-        // Pull image from url
         Glide.with(context).load(product.getThumbnailUrl()).into(holder.photo);
 
-        holder.discount.setText(product.getDiscountRatio().equals("0%") ? null : product.getDiscountRatio() + " ");
-        holder.price.setText(product.getDisplayedPrice());
-        holder.market.setText(product.getMarketName());
-        holder.name.setText(product.getProductName());
+        holder.discount .setText(product.getDiscountRatio().equals("0%") ? null : product.getDiscountRatio() + " ");
+        holder.price    .setText(product.getDisplayedPrice());
+        holder.market   .setText(product.getMarketName());
+        holder.name     .setText(product.getProductName());
 
         if (product.getIsHotDeal().equals("Y")) {
             holder.tag.setImageResource(R.drawable.img_hotdeal);
-            String purchaseCnt = "             " + product.getPurchaseCnt();
-            holder.sales.setText(purchaseCnt);
+            if (!product.getPurchaseCnt().equals("0")) {
+                String purchaseCnt = "             " + product.getPurchaseCnt();
+                holder.sales.setText(purchaseCnt);
+            }
+            else {
+                holder.sales.setVisibility(View.INVISIBLE);
+            }
         }
         else if (product.getIsNew().equals("Y")) {
             holder.tag.setImageResource(R.drawable.img_new);
-            String purchaseCnt = "             " + product.getPurchaseCnt();
-            holder.sales.setText(purchaseCnt);
+            if (!product.getPurchaseCnt().equals("0")) {
+                String purchaseCnt = "             " + product.getPurchaseCnt();
+                holder.sales.setText(purchaseCnt);
+            }
+            else {
+                holder.sales.setVisibility(View.INVISIBLE);
+            }
         }
         else {
             holder.tag.setVisibility(View.INVISIBLE);
-            holder.sales.setText(product.getPurchaseCnt());
+            if (!product.getPurchaseCnt().equals("0")) {
+                holder.sales.setText(product.getPurchaseCnt());
+            }
+            else {
+                holder.sales.setVisibility(View.INVISIBLE);
+            }
         }
 
         holder.heart.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +122,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
         CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.photo =    itemView.findViewById(R.id.item_product_iv_image);
+            this.photo =    itemView.findViewById(R.id.item_product_double_iv_image1);
             this.discount = itemView.findViewById(R.id.item_product_tv_discount);
             this.price =    itemView.findViewById(R.id.item_product_tv_price);
             this.market =   itemView.findViewById(R.id.item_product_tv_market);

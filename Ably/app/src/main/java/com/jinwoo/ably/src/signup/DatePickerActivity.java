@@ -2,6 +2,7 @@ package com.jinwoo.ably.src.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
@@ -23,15 +24,7 @@ public class DatePickerActivity extends BaseActivity {
         setContentView(R.layout.activity_date_picker);
         mapWidgets();
 
-        yy = Integer.toString(mDatePicker.getYear());
-
-        int month = mDatePicker.getMonth() + 1;
-        if (month < 10) mm = "0" + month;
-        else mm = Integer.toString(month);
-
-        int day = mDatePicker.getDayOfMonth();
-        if (day < 10) dd = "0" + day;
-        else dd = Integer.toString(mDatePicker.getDayOfMonth());
+       getDate();
 
         mDatePicker.init(mDatePicker.getYear(),
                         mDatePicker.getMonth(),
@@ -39,9 +32,8 @@ public class DatePickerActivity extends BaseActivity {
                         new DatePicker.OnDateChangedListener() {
                             @Override
                             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                yy = Integer.toString(year);
-                                mm = Integer.toString(monthOfYear + 1);
-                                dd = Integer.toString(dayOfMonth);
+                               getDate();
+
                             }
                         });
 
@@ -61,6 +53,7 @@ public class DatePickerActivity extends BaseActivity {
                 intent.putExtra("YEAR", yy);
                 intent.putExtra("MONTH", mm);
                 intent.putExtra("DAY", dd);
+                Log.d("DATE", yy + " " + mm + " " + dd);
                 setResult(1, intent);
                 finish();
             }
@@ -72,4 +65,17 @@ public class DatePickerActivity extends BaseActivity {
         mCancel = findViewById(R.id.date_picker_tv_cancel);
         mOk = findViewById(R.id.date_picker_tv_ok);
     }
+
+    private void getDate() {
+        yy = Integer.toString(mDatePicker.getYear());
+
+        int month = mDatePicker.getMonth() + 1;
+        if (month < 10) mm = "0" + month;
+        else mm = Integer.toString(month);
+
+        int day = mDatePicker.getDayOfMonth();
+        if (day < 10) dd = "0" + day;
+        else dd = Integer.toString(mDatePicker.getDayOfMonth());
+    }
+
 }

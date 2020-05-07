@@ -1,66 +1,605 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorLighterGrey">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:text="MY_PAGE"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:text="MY_PAGE"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:text="MY_PAGE"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:text="MY_PAGE"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:text="MY_PAGE"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:text="MY_PAGE"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:text="MY_PAGE"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:gravity="center"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="16dp">
 
-    </LinearLayout>
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/roundedImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_my_page_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:riv_corner_radius="20dp" />
+
+                <TextView
+                    android:id="@+id/my_page_tv_welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    android:text="WELCOME"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/my_page_tv_monthly_benefit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="5월 혜택"
+                    android:textColor="@color/colorGrey"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/my_page_tv_welcome"
+                    app:layout_constraintStart_toEndOf="@+id/my_page_tv_welcome" />
+
+                <TextView
+                    android:id="@+id/my_page_tv_benefit_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="1% 적립 + 무료배송"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/my_page_tv_welcome"
+                    app:layout_constraintTop_toBottomOf="@+id/my_page_tv_welcome" />
+
+                <View
+                    android:id="@+id/my_page_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/colorLighterGrey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/my_page_tv_benefit_detail" />
+
+                <TextView
+                    android:id="@+id/my_page_tv_next_rank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="다음 달 예상등급 : WELCOME"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/my_page_divider"
+                    app:layout_constraintTop_toBottomOf="@+id/my_page_divider" />
+
+                <TextView
+                    android:id="@+id/my_page_tv_more1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="50,000원"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/my_page_tv_next_rank"
+                    app:layout_constraintTop_toBottomOf="@+id/my_page_tv_next_rank" />
+
+                <TextView
+                    android:id="@+id/my_page_tv_more_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 더 구매 시 다음 달"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toEndOf="@+id/my_page_tv_more1"
+                    app:layout_constraintTop_toTopOf="@+id/my_page_tv_more1" />
+
+                <TextView
+                    android:id="@+id/my_page_tv_more3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" FRIENDS"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/my_page_tv_more_2"
+                    app:layout_constraintTop_toTopOf="@+id/my_page_tv_more_2" />
+
+                <TextView
+                    android:id="@+id/my_page_tv_more4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 달성!"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toEndOf="@+id/my_page_tv_more3"
+                    app:layout_constraintTop_toTopOf="@+id/my_page_tv_more_2" />
+
+                <ProgressBar
+                    android:id="@+id/my_page_exp"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/my_page_tv_more_2" />
+
+                <TextView
+                    android:id="@+id/my_page_tv_current_rank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="WELCOME"
+                    android:textColor="@color/colorGrey"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/my_page_tv_more1"
+                    app:layout_constraintTop_toBottomOf="@+id/my_page_exp" />
+
+                <TextView
+                    android:id="@+id/my_page_tv_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="FRIENDS"
+                    android:textColor="@color/colorGrey"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="@+id/my_page_exp"
+                    app:layout_constraintTop_toBottomOf="@+id/my_page_exp" />
+
+                <TextView
+                    android:id="@+id/my_page_tv_see_benefits"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:text="등급별 혜택보기"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@color/colorWhite">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/icon_delivery_hollow" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/my_page_tv_order1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="주문"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/my_page_tv_order2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="0"
+                            android:textColor="@color/colorOrange"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/my_page_tv_order3"
+                            app:layout_constraintStart_toEndOf="@+id/my_page_tv_order1"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/my_page_tv_order3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="개"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@color/colorWhite"
+                    android:layout_marginHorizontal="1dp">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/icon_point_hollow" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/my_page_tv_point1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="포인트"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/my_page_tv_point2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="0"
+                            android:textColor="@color/colorOrange"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/my_page_tv_point3"
+                            app:layout_constraintStart_toEndOf="@+id/my_page_tv_point1"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/my_page_tv_point3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="p"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@color/colorWhite">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/icon_coupon_hollow" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/my_page_tv_coupon1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="쿠폰"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/my_page_tv_coupon2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="0"
+                            android:textColor="@color/colorOrange"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/my_page_tv_coupon3"
+                            app:layout_constraintStart_toEndOf="@+id/my_page_tv_coupon1"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/my_page_tv_coupon3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="개"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginBottom="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="최근 본 상품"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginBottom="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="회원 정보 수정"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginBottom="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="내 문의 내역"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginBottom="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="이벤트 신청내역"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginBottom="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="나의 리뷰 (0건)"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginBottom="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="공지사항"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginBottom="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="고객센터"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginBottom="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="서비스 이용약관"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginBottom="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="개인정보 수집 및 이용"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginBottom="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="마케팅 알림 수신"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginBottom="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="버전 정보 2.17.1"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:text="최신버전입니다"
+                        android:textColor="@color/colorLightGrey"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"
+                android:background="@color/colorWhite"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="로그아웃"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
 </FrameLayout>

@@ -16,13 +16,17 @@ public class OptionAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<String> options;
-    private ArrayList<Integer> prices;
+    private ArrayList<Integer> prices, stocks;
     private LayoutInflater inflater;
 
-    public OptionAdapter(@NonNull Context context, ArrayList<String> options, ArrayList<Integer> prices) {
+    public OptionAdapter(@NonNull Context context,
+                         ArrayList<String> options,
+                         ArrayList<Integer> prices,
+                         ArrayList<Integer> stocks) {
         this.context = context;
         this.options = options;
         this.prices = prices;
+        this.stocks = stocks;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -74,7 +78,7 @@ public class OptionAdapter extends BaseAdapter {
         else {
             itemPrice.setVisibility(View.VISIBLE);
             NumberFormat format = NumberFormat.getInstance();
-            String displayedPrice = format.format(prices.get(position - 1)) + "원";
+            String displayedPrice = format.format(prices.get(position)) + "원";
             itemPrice.setText(displayedPrice);
         }
 

@@ -2,11 +2,10 @@ package com.jinwoo.ably.src.purchase.data;
 
 public class CartItem {
 
-    private int productIdx, count, cost;
+    private int count, cost;
     private String productThumbnail, productName, marketName, option1, option2;
 
-    public CartItem(int productIdx, int count, int cost, String productThumbnail, String productName, String marketName, String option1, String option2) {
-        this.productIdx = productIdx;
+    public CartItem(int count, int cost, String productThumbnail, String productName, String marketName, String option1, String option2) {
         this.count = count;
         this.cost = cost;
         this.productThumbnail = productThumbnail;
@@ -16,7 +15,6 @@ public class CartItem {
         this.option2 = option2;
     }
 
-    public int getProductIdx() { return productIdx; }
     public int getCount() { return count; }
     public int getCost() { return cost; }
     public String getProductThumbnail() { return productThumbnail; }

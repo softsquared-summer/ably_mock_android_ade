@@ -50,17 +50,32 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
         if (product.getIsHotDeal().equals("Y")) {
             holder.tag.setImageResource(R.drawable.img_hotdeal);
-            String purchaseCnt = "             " + product.getPurchaseCnt();
-            holder.sales.setText(purchaseCnt);
+            if (!product.getPurchaseCnt().equals("0")) {
+                String purchaseCnt = "             " + product.getPurchaseCnt();
+                holder.sales.setText(purchaseCnt);
+            }
+            else {
+                holder.sales.setVisibility(View.INVISIBLE);
+            }
         }
         else if (product.getIsNew().equals("Y")) {
             holder.tag.setImageResource(R.drawable.img_new);
-            String purchaseCnt = "             " + product.getPurchaseCnt();
-            holder.sales.setText(purchaseCnt);
+            if (!product.getPurchaseCnt().equals("0")) {
+                String purchaseCnt = "             " + product.getPurchaseCnt();
+                holder.sales.setText(purchaseCnt);
+            }
+            else {
+                holder.sales.setVisibility(View.INVISIBLE);
+            }
         }
         else {
             holder.tag.setVisibility(View.INVISIBLE);
-            holder.sales.setText(product.getPurchaseCnt());
+            if (!product.getPurchaseCnt().equals("0")) {
+                holder.sales.setText(product.getPurchaseCnt());
+            }
+            else {
+                holder.sales.setVisibility(View.INVISIBLE);
+            }
         }
 
         holder.heart.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +132,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
 
         CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.photo =    itemView.findViewById(R.id.item_product_iv_image);
+            this.photo =    itemView.findViewById(R.id.item_product_double_iv_image1);
             this.discount = itemView.findViewById(R.id.item_product_tv_discount);
             this.price =    itemView.findViewById(R.id.item_product_tv_price);
             this.market =   itemView.findViewById(R.id.item_product_tv_market);

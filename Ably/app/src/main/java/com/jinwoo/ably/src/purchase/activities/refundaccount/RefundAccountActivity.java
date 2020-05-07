@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.refundaccount;
+package com.jinwoo.ably.src.purchase.activities.refundaccount;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

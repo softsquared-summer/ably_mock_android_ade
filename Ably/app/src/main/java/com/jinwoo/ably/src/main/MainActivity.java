@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jinwoo.ably.R;
 import com.jinwoo.ably.src.ApplicationClass;
@@ -28,12 +30,11 @@ import com.jinwoo.ably.src.main.fragments.pick.FragmentPick;
 import com.jinwoo.ably.src.main.fragments.mypage.FragmentMyPage;
 import com.jinwoo.ably.src.signin.SignInActivity;
 import com.jinwoo.ably.src.signup.SignUpHomeActivity;
-
 import static com.jinwoo.ably.src.ApplicationClass.USER_NAME;
 import static com.jinwoo.ably.src.ApplicationClass.X_ACCESS_TOKEN;
 import static com.jinwoo.ably.src.ApplicationClass.sSharedPreferences;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private boolean isLoggedIn;
     private DrawerLayout mDrawerLayout;
@@ -47,6 +48,7 @@ public class MainActivity extends BaseActivity {
     private FragmentTransaction mFragmentTransaction;
     private ExpandableListView mDrawerListView;
     private DrawerListAdapter mDrawerListAdapter;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,9 @@ public class MainActivity extends BaseActivity {
             mLogin.setVisibility(View.VISIBLE);
             mSignUp.setText("5초 회원가입");
         }
+
+        // Swipe refresh setting
+        mSwipeRefreshLayout.setOnRefreshListener(this);
 
         // Initializing drawer listview
         mDrawerListAdapter = new DrawerListAdapter(getApplicationContext(), R.layout.item_category_parent, R.layout.item_category_child, ApplicationClass.getCategories());
@@ -221,6 +226,7 @@ public class MainActivity extends BaseActivity {
         mDelivery =             findViewById(R.id.drawer_delivery);
         mSupport =              findViewById(R.id.drawer_support);
         mDrawerListView =       findViewById(R.id.drawer_listview);
+        mSwipeRefreshLayout =   findViewById(R.id.main_swipe_layout);
     }
 
     private void changeFragment(Fragment fragment) {
@@ -247,5 +253,14 @@ public class MainActivity extends BaseActivity {
             mDrawerLayout.closeDrawers();
         else
             finish();
+    }
+
+    @Override
+    public void onRefresh() {
+        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if (isLoggedIn) intent.putExtra("LOG_IN", true);
+        startActivity(intent);
+        finish();
     }
 }

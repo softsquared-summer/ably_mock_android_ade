@@ -41,6 +41,7 @@ public class ProductActivity extends BaseActivity implements ProductView, Option
                                     mProductCode, mContents, mIsMyHeart, mMarketName, mMarketHashTags,
                                     mMarketThumbnailUrl;
     private ArrayList<String>       mMainImgUrlList, mNormalImgUrlList;
+    private ArrayList<Integer>      mDetailedProductIdx;
     private ImageSlideAdapter       mImageSliderAdapter;
     private PagerAdapter            mPagerAdapter;
     private ProductService          mProductService;
@@ -212,27 +213,30 @@ public class ProductActivity extends BaseActivity implements ProductView, Option
     public void onPurchaseClicked(ArrayList<SelectedOption> selectedOptionList) {
         // Load option information into an intent and carry it over to PurchaseActivity
         Intent intent = new Intent(ProductActivity.this, PurchaseActivity.class);
-        ArrayList<String> option1List = new ArrayList<>();
-        ArrayList<String> option2List = new ArrayList<>();
-        ArrayList<Integer> countList = new ArrayList<>();
-        ArrayList<Integer> costList = new ArrayList<>();
+        ArrayList<Integer> idxList      = new ArrayList<>();
+        ArrayList<String> option1List   = new ArrayList<>();
+        ArrayList<String> option2List   = new ArrayList<>();
+        ArrayList<Integer> countList    = new ArrayList<>();
+        ArrayList<Integer> costList     = new ArrayList<>();
 
         for (int i = 0; i < selectedOptionList.size(); i++) {
+            int idx         = selectedOptionList.get(i).getIdx();
             String option1  = selectedOptionList.get(i).getOption1();
             String option2  = selectedOptionList.get(i).getOption2();
             int count       = selectedOptionList.get(i).getCount();
             int cost        = selectedOptionList.get(i).getCost();
 
-            option1List.add(option1);
-            option2List.add(option2);
-            countList.add(count);
-            costList.add(cost);
+            idxList     .add(idx);
+            option1List .add(option1);
+            option2List .add(option2);
+            countList   .add(count);
+            costList    .add(cost);
         }
 
-        intent.putExtra("PRODUCT_INDEX", mProductIdx);
         intent.putExtra("PRODUCT_NAME", mProductName);
         intent.putExtra("MARKET_NAME", mMarketName);
         intent.putExtra("PRODUCT_THUMBNAIL", mMainImgUrlList.get(0));
+        intent.putIntegerArrayListExtra("IDX", idxList);
         intent.putStringArrayListExtra("OPTION_1", option1List);
         intent.putStringArrayListExtra("OPTION_2", option2List);
         intent.putIntegerArrayListExtra("COUNT", countList);

@@ -1,13 +1,13 @@
-package com.jinwoo.ably.src.chooseaddress.fragments.addresslist.data;
+package com.jinwoo.ably.src.purchase.activities.chooseaddress.fragments.addresslist.data;
 
 public class Address {
 
-    private String receiver, postNumber, address, detail, contact;
+    private String receiver, postalCode, address, detail, contact;
     private boolean selected;
 
-    public Address(String receiver, String postNumber, String address, String detail, String contact) {
+    public Address(String receiver, String postalCode, String address, String detail, String contact) {
         this.receiver = receiver;
-        this.postNumber = postNumber;
+        this.postalCode = postalCode;
         this.address = address;
         this.detail = detail;
         this.contact = contact;
@@ -16,8 +16,8 @@ public class Address {
 
     public String getReceiver() { return receiver; }
     public void setReceiver(String receiver) { this.receiver = receiver; }
-    public String getPostNumber() { return postNumber; }
-    public void setPostNumber(String postNumber) { this.postNumber = postNumber; }
+    public String getPostalCode() { return postalCode; }
+    public void setPostalCode(String postalCode) { this.postalCode = postalCode; }
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
     public String getDetail() { return detail; }

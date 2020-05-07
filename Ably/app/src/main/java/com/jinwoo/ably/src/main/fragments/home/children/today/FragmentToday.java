@@ -33,8 +33,8 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
     private RecyclerView mRecommendations;
     private ProductRecyclerAdapter mProductRecyclerAdapter;
     private BannerSlideAdapter mBannerSlideAdapter;
-    private ArrayList<Product> productList;
-    private ArrayList<String> banners;
+    private ArrayList<Product> mProducts;
+    private ArrayList<String> mBanners;
     private Handler mSlideHandler;
     private TodayService mTodayService;
 
@@ -67,7 +67,7 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
                 mSlideHandler.removeCallbacks(slideRunnable);
                 mSlideHandler.postDelayed(slideRunnable, 3000);
 
-                String currentPage = (mBannerSlider.getCurrentItem() + 1) + "/" + banners.size();
+                String currentPage = (mBannerSlider.getCurrentItem() + 1) + "/" + mBanners.size();
                 mPages.setText(currentPage);
             }
         });
@@ -102,7 +102,7 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
             mBannerSlider.setCurrentItem(mBannerSlider.getCurrentItem() + 1);
 
             // If current page is the last, set it to 0 after 3 seconds
-            if (mBannerSlider.getCurrentItem() == banners.size() - 1) {
+            if (mBannerSlider.getCurrentItem() == mBanners.size() - 1) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -135,7 +135,7 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
 
     @Override
     public void validateBannerSuccess(BannerResponse bannerResponse) {
-        banners = new ArrayList<>();
+        mBanners = new ArrayList<>();
         int code = bannerResponse.getCode();
 
         if (code == 100) {
@@ -143,17 +143,17 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
 
             for (int i = 0; i < result.size(); i++) {
                 String url = result.get(i).getBannerUrl();
-                banners.add(url);
+                mBanners.add(url);
             }
 
-            mBannerSlideAdapter = new BannerSlideAdapter(getContext(), banners);
+            mBannerSlideAdapter = new BannerSlideAdapter(getContext(), mBanners);
             mBannerSlider.setAdapter(mBannerSlideAdapter);
         }
     }
 
     @Override
     public void validateRecommendationSuccess(RecommendationResponse recommendationResponse) {
-        productList = new ArrayList<>();
+        mProducts = new ArrayList<>();
         int code = recommendationResponse.getCode();
 
         if (code == 100) {
@@ -174,11 +174,11 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
 
 
                 Product product = new Product(productIdx, thumbnailUrl, discountRatio, displayedPrice, marketIdx, marketName, productName, purchaseCnt, isMyHeart, isHotDeal, isNew);
-                productList.add(product);
+                mProducts.add(product);
             }
 
             mRecommendations.setHasFixedSize(true);
-            mProductRecyclerAdapter = new ProductRecyclerAdapter(productList, getActivity());
+            mProductRecyclerAdapter = new ProductRecyclerAdapter(mProducts, getActivity());
             mRecommendations.setLayoutManager(new GridLayoutManager(getActivity(), 2));
             mRecommendations.setAdapter(mProductRecyclerAdapter);
         }

@@ -98,6 +98,7 @@ public class FragmentNew extends Fragment implements NewFragmentView {
 
             productSlideAdapter = new ProductSlideAdapter(mBestProducts, context);
             mViewPager.setAdapter(productSlideAdapter);
+
         }
     }
 

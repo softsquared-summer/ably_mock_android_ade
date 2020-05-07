@@ -1,4 +1,4 @@
-package com.jinwoo.ably.src.chooseaddress.fragments.addresslist.adapters;
+package com.jinwoo.ably.src.purchase.activities.chooseaddress.fragments.addresslist.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.jinwoo.ably.R;
-import com.jinwoo.ably.src.chooseaddress.fragments.addresslist.data.Address;
+import com.jinwoo.ably.src.purchase.activities.chooseaddress.fragments.addresslist.data.Address;
 import java.util.ArrayList;
 
 public class AddressListAdapter extends BaseAdapter {
@@ -18,11 +18,13 @@ public class AddressListAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Address> items;
     private LayoutInflater inflater;
+    private int defaultAddress;
 
     public AddressListAdapter(Context context, ArrayList<Address> items) {
         this.context = context;
         this.items = items;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        defaultAddress = -1;
     }
 
     @Override
@@ -41,14 +43,14 @@ public class AddressListAdapter extends BaseAdapter {
         }
         Address item = items.get(position);
 
-        ImageView defaultAddress = convertView.findViewById(R.id.address_iv_default);
+        ImageView defaultAddressImg = convertView.findViewById(R.id.address_iv_default);
         if (item.isSelected()) {
             convertView.setBackgroundResource(R.drawable.button_blue);
-            defaultAddress.setVisibility(View.VISIBLE);
+            defaultAddressImg.setVisibility(View.VISIBLE);
         }
         else {
             convertView.setBackgroundResource(R.drawable.button_white);
-            defaultAddress.setVisibility(View.INVISIBLE);
+            defaultAddressImg.setVisibility(View.INVISIBLE);
         }
 
         TextView receiver = convertView.findViewById(R.id.address_tv_receiver);
@@ -67,7 +69,11 @@ public class AddressListAdapter extends BaseAdapter {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO: double check deletion
                 items.remove(item);
+                if (position == getDefaultAddress()) {
+                    setDefaultAddress(-1);
+                }
                 Toast.makeText(context, "주소가 삭제되었습니다", Toast.LENGTH_SHORT).show();
                 notifyDataSetChanged();
             }
@@ -86,6 +92,7 @@ public class AddressListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (!item.isSelected()) {
+                    setDefaultAddress(position);
                     item.setSelected(true);
                     unselectOthers(position);
                     notifyDataSetChanged();
@@ -102,5 +109,13 @@ public class AddressListAdapter extends BaseAdapter {
                 items.get(i).setSelected(false);
             }
         }
+    }
+
+    private void setDefaultAddress(int position) {
+        defaultAddress = position;
+    }
+
+    public int getDefaultAddress() {
+        return defaultAddress;
     }
 }

@@ -123,7 +123,6 @@ public class CartItemListAdapter extends BaseExpandableListAdapter {
         }
 
         CartItem item = cart.getCartItems().get(childPosition);
-        int productIdx          = item.getProductIdx();
         int count               = item.getCount();
         int cost                = item.getCost();
         String productThumbnail = item.getProductThumbnail();

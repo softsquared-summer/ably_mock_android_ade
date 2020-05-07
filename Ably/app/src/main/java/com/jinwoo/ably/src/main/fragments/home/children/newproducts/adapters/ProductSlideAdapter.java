@@ -61,17 +61,32 @@ public class ProductSlideAdapter extends PagerAdapter {
 
             if (product.getIsHotDeal().equals("Y")) {
                 mTag.setImageResource(R.drawable.img_hotdeal);
-                String purchaseCnt = "             " + product.getPurchaseCnt();
-                mSales.setText(purchaseCnt);
+                if (!product.getPurchaseCnt().equals("0")) {
+                    String purchaseCnt = "             " + product.getPurchaseCnt();
+                    mSales.setText(purchaseCnt);
+                }
+                else {
+                    mSales.setVisibility(View.INVISIBLE);
+                }
             }
             else if (product.getIsNew().equals("Y")) {
                 mTag.setImageResource(R.drawable.img_new);
-                String purchaseCnt = "             " + product.getPurchaseCnt();
-                mSales.setText(purchaseCnt);
+                if (!product.getPurchaseCnt().equals("0")) {
+                    String purchaseCnt = "             " + product.getPurchaseCnt();
+                    mSales.setText(purchaseCnt);
+                }
+                else {
+                    mSales.setVisibility(View.INVISIBLE);
+                }
             }
             else {
                 mTag.setVisibility(View.INVISIBLE);
-                mSales.setText(product.getPurchaseCnt());
+                if (!product.getPurchaseCnt().equals("0")) {
+                    mSales.setText(product.getPurchaseCnt());
+                }
+                else {
+                    mSales.setVisibility(View.INVISIBLE);
+                }
             }
 
             mHeart.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +141,7 @@ public class ProductSlideAdapter extends PagerAdapter {
     }
 
     private void mapWidgets(View view) {
-        mProductImage = view.findViewById(R.id.item_product_iv_image);
+        mProductImage = view.findViewById(R.id.item_product_double_iv_image1);
         mDiscount = view.findViewById(R.id.item_product_tv_discount);
         mPrice = view.findViewById(R.id.item_product_tv_price);
         mMarketName = view.findViewById(R.id.item_product_tv_market);
@@ -139,5 +154,10 @@ public class ProductSlideAdapter extends PagerAdapter {
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((ConstraintLayout) object);
+    }
+
+    @Override
+    public float getPageWidth(int position) {
+        return 0.5f;
     }
 }
