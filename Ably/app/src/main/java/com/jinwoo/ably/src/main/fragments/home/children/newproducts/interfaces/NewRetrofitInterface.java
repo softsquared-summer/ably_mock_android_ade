@@ -4,6 +4,7 @@ import com.jinwoo.ably.src.main.fragments.home.children.newproducts.models.BestP
 import com.jinwoo.ably.src.main.fragments.home.children.newproducts.models.NewProductsResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface NewRetrofitInterface {
 
@@ -11,5 +12,5 @@ public interface NewRetrofitInterface {
     Call<BestProductsResponse> getBestProducts();
 
     @GET("/new-products")
-    Call<NewProductsResponse> getNewProducts();
+    Call<NewProductsResponse> getNewProducts(@Query("page") int page);
 }

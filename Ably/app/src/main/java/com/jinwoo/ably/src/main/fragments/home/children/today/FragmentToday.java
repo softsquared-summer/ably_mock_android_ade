@@ -1,5 +1,7 @@
 package com.jinwoo.ably.src.main.fragments.home.children.today;
 
+import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,9 +30,11 @@ import static com.jinwoo.ably.src.ApplicationClass.sSharedPreferences;
 
 public class FragmentToday extends Fragment implements TodayFragmentView {
 
+    private ProgressDialog mProgressDialog;
     private ImageView mTopAd;
     private ViewPager2 mBannerSlider;
     private TextView mPages, mRecommendationsForUser;
+    private NestedScrollView mScrollView;
     private RecyclerView mRecommendations;
     private ProductRecyclerAdapter mProductRecyclerAdapter;
     private BannerSlideAdapter mBannerSlideAdapter;
@@ -37,6 +42,8 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
     private ArrayList<String> mBanners;
     private Handler mSlideHandler;
     private TodayService mTodayService;
+    private int mPage;
+    private GridLayoutManager layoutManager;
 
     public FragmentToday() { }
 
@@ -45,6 +52,7 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_main_home_today, container, false);
         mTodayService = new TodayService(this);
+        mProducts = new ArrayList<>();
         mapWidgets(view);
 
         mTopAd.setOnClickListener(new View.OnClickListener(){
@@ -83,7 +91,22 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
         }
 
         // Item recommendations mapping
-        tryGetRecommendations();
+        mPage = 1;
+
+        tryGetRecommendations(mPage);
+
+        // Paging mechanism
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    boolean isAtLast = !mScrollView.canScrollVertically(1);
+                    if (isAtLast) {
+                        tryGetRecommendations(++mPage);
+                    }
+                }
+            });
+        }
 
         return view;
     }
@@ -94,6 +117,7 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
         mPages =                    view.findViewById(R.id.today_tv_banner_pages);
         mRecommendationsForUser =   view.findViewById(R.id.today_tv_recommendations_for_user);
         mRecommendations =          view.findViewById(R.id.today_body);
+        mScrollView                = view.findViewById(R.id.today_scrollview);
     }
 
     private Runnable slideRunnable = new Runnable() {
@@ -117,8 +141,9 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
         mTodayService.getBanners();
     }
 
-    private void tryGetRecommendations() {
-        mTodayService.getRecommendations();
+    private void tryGetRecommendations(int page) {
+        showProgressDialog();
+        mTodayService.getRecommendations(page);
     }
 
     @Override
@@ -134,7 +159,14 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        hideProgressDialog();
+    }
+
+    @Override
     public void validateBannerSuccess(BannerResponse bannerResponse) {
+        hideProgressDialog();
         mBanners = new ArrayList<>();
         int code = bannerResponse.getCode();
 
@@ -153,7 +185,7 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
 
     @Override
     public void validateRecommendationSuccess(RecommendationResponse recommendationResponse) {
-        mProducts = new ArrayList<>();
+        hideProgressDialog();
         int code = recommendationResponse.getCode();
 
         if (code == 100) {
@@ -172,18 +204,34 @@ public class FragmentToday extends Fragment implements TodayFragmentView {
                 String isHotDeal =      recommendations.get(i).getIsHotDeal();
                 String isNew =          recommendations.get(i).getIsNew();
 
-
                 Product product = new Product(productIdx, thumbnailUrl, discountRatio, displayedPrice, marketIdx, marketName, productName, purchaseCnt, isMyHeart, isHotDeal, isNew);
                 mProducts.add(product);
             }
 
             mRecommendations.setHasFixedSize(true);
             mProductRecyclerAdapter = new ProductRecyclerAdapter(mProducts, getActivity());
-            mRecommendations.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            layoutManager = new GridLayoutManager(getActivity(), 2);
+            mRecommendations.setLayoutManager(layoutManager);
             mRecommendations.setAdapter(mProductRecyclerAdapter);
         }
     }
 
     @Override
     public void validateFailure(String message) {}
+
+    public void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getActivity());
+            mProgressDialog.setMessage(getString(R.string.loading));
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
 }

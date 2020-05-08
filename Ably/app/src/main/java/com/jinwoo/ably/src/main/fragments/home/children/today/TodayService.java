@@ -42,10 +42,10 @@ public class TodayService {
 
     }
 
-    public void getRecommendations() {
+    public void getRecommendations(int page) {
         final TodayRetrofitInterface todayRetrofitInterface = getRetrofit().create(TodayRetrofitInterface.class);
 
-        todayRetrofitInterface.getRecommendations().enqueue(new Callback<RecommendationResponse>() {
+        todayRetrofitInterface.getRecommendations(page).enqueue(new Callback<RecommendationResponse>() {
             @Override
             public void onResponse(Call<RecommendationResponse> call, Response<RecommendationResponse> response) {
 

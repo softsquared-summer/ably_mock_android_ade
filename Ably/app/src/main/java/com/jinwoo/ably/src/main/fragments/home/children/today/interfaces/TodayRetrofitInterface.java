@@ -4,6 +4,7 @@ import com.jinwoo.ably.src.main.fragments.home.children.today.models.BannerRespo
 import com.jinwoo.ably.src.main.fragments.home.children.today.models.RecommendationResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface TodayRetrofitInterface {
 
@@ -11,6 +12,5 @@ public interface TodayRetrofitInterface {
     Call<BannerResponse> getBanners();
 
     @GET("/recommended-products")
-    Call<RecommendationResponse> getRecommendations();
-
+    Call<RecommendationResponse> getRecommendations(@Query("page") int page);
 }

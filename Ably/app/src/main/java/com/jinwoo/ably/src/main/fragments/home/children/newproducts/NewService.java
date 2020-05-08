@@ -41,10 +41,10 @@ public class NewService {
         });
     }
 
-    public void getNewProducts() {
+    public void getNewProducts(int page) {
         final NewRetrofitInterface retrofitInterface = getRetrofit().create(NewRetrofitInterface.class);
 
-        retrofitInterface.getNewProducts().enqueue(new Callback<NewProductsResponse>() {
+        retrofitInterface.getNewProducts(page).enqueue(new Callback<NewProductsResponse>() {
             @Override
             public void onResponse(Call<NewProductsResponse> call, Response<NewProductsResponse> response) {
                 NewProductsResponse newProductsResponse = response.body();
